@@ -1,0 +1,172 @@
+@charset "UTF-8";
+/* ------ basic styling --------- */
+* {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+body {
+	background-color: #E7E7E7;
+	}
+p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+	font-style: normal;
+	font-weight: lighter;
+	color: #434343;
+	text-decoration: none;
+	text-align: left;
+	padding: 5px;
+	line-height: 1.2em;
+}
+h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #2E2E2E;
+	text-indent: 1em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+h2 {
+	font-size: 1em;
+	font-weight: bold;
+	color: #2E2E2E;
+	text-indent: 1em;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	padding: 5px;
+	text-decoration: none;
+}
+a {
+	color: #E2007A;
+	text-decoration: none;
+}
+a:hover {
+	color: #D409B7;
+	text-decoration: underline;
+}
+strong {
+	font-weight: bold;
+}
+#content .rightcolumn li {
+	text-decoration: none;
+	font-size: 0.8em;
+	list-style-type: none;
+	margin-left: 50px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #434343;
+}
+/* ------- position container elements --------- */
+#wrapper {
+	position: relative;
+	width: 900px;
+	background-color:#fff;
+	margin-top: 25px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	z-index: 10;
+	}
+#header{
+	position:relative;
+	width: 900px;
+	z-index: 20;
+	}
+#header  img  {
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 0px;
+}
+#navbar {
+	background-image: url(navbarfondoII.jpg);
+	background-repeat: no-repeat;
+	width: 900px;
+	height: 40px;
+	position: relative;
+	z-index: 60;
+}
+#content {
+	width:900px;
+	position: relative;
+	clear: both;
+	z-index: 40;
+	}
+.tablegalery {
+	text-align: center;
+}
+	
+/* ------- leftcolumn-rightcolumn djidja midja sto se pojavljuje na svim paginama
+osim na index page --------- */
+	
+#content  .leftcolumn {
+	float: left;
+	z-index: 43;
+	height: auto;
+	width: 276px;
+	margin-top: 10px;
+	margin-left: 40px;
+}
+#content .rightcolumn {
+	float: left;
+	z-index: 46;
+	width: 500px;
+	margin-top: 10px;
+	margin-left: 40px;
+	border-left-width: 4px;
+	border-left-style: solid;
+	border-left-color: #FFFFFF;
+}
+
+/* ------- promokontejner djidja midja sto se pojavljuje na index site
+---------- promofield unutrasnje polje na index page --------- */
+#content .promocontainer {
+	float: left;
+	height: auto;
+	width: 390px;
+	margin-left: 40px;
+	position: relative;
+	z-index: 43;
+}
+#content .containerlogos {
+	float: left;
+	height: auto;
+	width: 820px;
+	margin-left: 40px;
+	position: relative;
+	z-index: 43;
+	clear: both;
+	margin-top: 18px;
+	margin-bottom: 20px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #BDBDBD;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #BDBDBD;
+}
+#content .promofield {
+	float: left;
+	height: auto;
+	width: 388px;
+	margin-top: 10px;
+	border: 1px solid #FFFFFF;
+	z-index: 45;
+}
+#footer {
+	position: relative;
+	z-index: 50;
+	width: 900px;
+	clear: both;
+	}
+#footer  p  {
+	font-size: 0.7em;
+	color: #4C4C4C;
+	text-align: center;
+	padding: 10px;
+	}

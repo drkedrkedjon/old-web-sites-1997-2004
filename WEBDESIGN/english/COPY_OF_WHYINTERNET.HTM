@@ -1,0 +1,165 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+  <script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+
+  <script language="JavaScript">
+<!--
+
+function MM_initTimelines() {
+    //MM_initTimelines() Copyright 1997 Macromedia, Inc. All rights reserved.
+    var ns = navigator.appName == "Netscape";
+    document.MM_Time = new Array(1);
+    document.MM_Time[0] = new Array(1);
+    document.MM_Time["Timeline1"] = document.MM_Time[0];
+    document.MM_Time[0].MM_Name = "Timeline1";
+    document.MM_Time[0].fps = 15;
+    document.MM_Time[0][0] = new String("sprite");
+    document.MM_Time[0][0].slot = 1;
+    if (ns)
+        document.MM_Time[0][0].obj = document["navbar"];
+    else
+        document.MM_Time[0][0].obj = document.all ? document.all["navbar"] : null;
+    document.MM_Time[0][0].keyFrames = new Array(1, 15);
+    document.MM_Time[0][0].values = new Array(2);
+    document.MM_Time[0][0].values[0] = new Array(-30,-28,-25,-23,-20,-18,-15,-13,-10,-7,-5,-3,0,3,5);
+    document.MM_Time[0][0].values[0].prop = "left";
+    document.MM_Time[0][0].values[1] = new Array(82,82,82,82,82,82,82,82,82,82,82,82,82,82,82);
+    document.MM_Time[0][0].values[1].prop = "top";
+    if (!ns) {
+        document.MM_Time[0][0].values[0].prop2 = "style";
+        document.MM_Time[0][0].values[1].prop2 = "style";
+    }
+    document.MM_Time[0].lastFrame = 15;
+    for (i=0; i<document.MM_Time.length; i++) {
+        document.MM_Time[i].ID = null;
+        document.MM_Time[i].curFrame = 0;
+        document.MM_Time[i].delay = 1000/document.MM_Time[i].fps;
+    }
+}
+//-->
+</script>
+  
+<script language="JavaScript">
+<!--
+function MM_timelinePlay(tmLnName, myID) { //v1.2
+  //Copyright 1997 Macromedia, Inc. All rights reserved.
+  var i,j,tmLn,props,keyFrm,sprite,numKeyFr,firstKeyFr,propNum,theObj,firstTime=false;
+  if (document.MM_Time == null) MM_initTimelines(); //if *very* 1st time
+  tmLn = document.MM_Time[tmLnName];
+  if (myID == null) { myID = ++tmLn.ID; firstTime=true;}//if new call, incr ID
+  if (myID == tmLn.ID) { //if Im newest
+    setTimeout('MM_timelinePlay("'+tmLnName+'",'+myID+')',tmLn.delay);
+    fNew = ++tmLn.curFrame;
+    for (i=0; i<tmLn.length; i++) {
+      sprite = tmLn[i];
+      if (sprite.charAt(0) == 's') {
+        if (sprite.obj) {
+          numKeyFr = sprite.keyFrames.length; firstKeyFr = sprite.keyFrames[0];
+          if (fNew >= firstKeyFr && fNew <= sprite.keyFrames[numKeyFr-1]) {//in range
+            keyFrm=1;
+            for (j=0; j<sprite.values.length; j++) {
+              props = sprite.values[j]; 
+              if (numKeyFr != props.length) {
+                if (props.prop2 == null) sprite.obj[props.prop] = props[fNew-firstKeyFr];
+                else        sprite.obj[props.prop2][props.prop] = props[fNew-firstKeyFr];
+              } else {
+                while (keyFrm<numKeyFr && fNew>=sprite.keyFrames[keyFrm]) keyFrm++;
+                if (firstTime || fNew==sprite.keyFrames[keyFrm-1]) {
+                  if (props.prop2 == null) sprite.obj[props.prop] = props[keyFrm-1];
+                  else        sprite.obj[props.prop2][props.prop] = props[keyFrm-1];
+        } } } } }
+      } else if (sprite.charAt(0)=='b' && fNew == sprite.frame) eval(sprite.value);
+      if (fNew > tmLn.lastFrame) tmLn.ID = 0;
+  } }
+}
+
+function MM_popupMsg(theMsg) { //v2.0
+  alert(theMsg);
+}
+//-->
+</script>
+<link rel="stylesheet" href="../images/stylebasico.css"></HEAD>
+
+<BODY onLoad="MM_timelinePlay('Timeline1')">
+<div id="mokesignde" style="position:absolute; visibility:visible; width:437px; height:67px; z-index:5; left: 89px; top: 12px">
+  <table border="0" width="500" cellpadding="0" cellspacing="0" hspace="0" vspace="0">
+    <tr>
+      <td> 
+        <p>&lt;|moKE signDE|&gt;<br>
+          <span class="ideshost">&nbsp;&nbsp;internet, design &amp; editing of 
+          web sites&nbsp;&nbsp;</span></p>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="navbar" style="position:absolute; left:-30px; top:82px; width:245px; height:211px; z-index:2; visibility: visible"> 
+  <table border="0" width="250" cellpadding="7" cellspacing="0" hspace="0" vspace="0" align="left">
+    <tr> 
+      <td width="5" align="center" valign="middle" class="ideshostnavbar">w<br>
+        h<br>
+        y<br>
+        <br>
+        i<br>
+        n<br>
+        t<br>
+        e<br>
+        r<br>
+        n<br>
+        e<br>
+        t</td>
+      <td width="245" align="left" valign="middle"><a href="index.htm"><< home 
+        page</a><br>
+        <br>
+        <a href="whyinternet.htm"> &lt;&lt; why internet</a><br>
+        <a href="future.htm"><br>
+        &lt;&lt; future of internet</a><br>
+        <a href="#" onClick="MM_popupMsg('To lazu to write down, sorry')"><br>
+        &lt;&lt; portfolio</a><br>
+        <a href="services.htm"><br>
+        &lt;&lt; services</a><br>
+        <a href="examples.htm"><br>
+        &lt;&lt; examples</a><br>
+        <a href="contact.htm"><br>
+        &lt;&lt; contact</a></td>
+    </tr>
+  </table>
+</div>
+<div id="text" style="position:absolute; left:244px; top:101px; width:330px; height:271px; z-index:3; visibility: visible"> 
+  <h2>&nbsp;&nbsp;jf ufys flist &ntilde;uytg a&ntilde;iuga &ntilde;udg a&ntilde;oug 
+    a&ntilde;udg &ntilde;auytg &ntilde;auydg a&ntilde;ug a&ntilde;ut gaug aug 
+    a&ntilde;utygautg a&ntilde;ugaug audgv 8uadv aoug autv audtvaiugv av auv autv 
+    autv adv autv ausvy apiv<br>
+    <br>
+    &nbsp;&nbsp;gdf a gauy aody aoduyg adg oaydgya aodigy ag oyag y oyg ag oyad 
+    goy afdgy asdg y aoisdg igf afdg<br>
+    <br>
+    &nbsp;&nbsp;oasgd ayg fdgioyad gay dogy aisdyg oiafg agy aigy aiogy agaiyiayga 
+    yogyaf gaidysgayg afig a...<br>
+    <br>
+    &nbsp;&nbsp;ifg afyg uii..</h2>
+</div>
+<div id="copyright" style="position:absolute; left:30px; top:346px; width:190px; height:24px; z-index:4; visibility: visible"><span class="copuright"> 
+  | |&nbsp;&copy; moKE signDE 1997 - 2002&nbsp;|</span></div>
+</BODY>
+</HTML>

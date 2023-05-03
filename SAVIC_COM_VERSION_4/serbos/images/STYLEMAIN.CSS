@@ -1,0 +1,8 @@
+
+a { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #FFFFFF ; text-decoration: none}
+h4 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #FFFFFF; text-align: justify}
+a:hover { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; color: #00FFFF; text-decoration: underline}
+p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #FFFFFF; text-align: justify; vertical-align: top}
+h1 {  font-family: "Times New Roman", Times, serif; font-size: 36pt; font-weight: lighter; color: #00FFCC; background-color: #006666}
+h2 { font-family: "Times New Roman", Times, serif; font-size: 24pt; font-weight: lighter; color: #CCFFFF; background-color: #006666 }
+h3 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: lighter; color: #FFFFFF }

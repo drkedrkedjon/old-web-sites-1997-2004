@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//SoftQuad//DTD HoTMetaL PRO 4.0::19970916::extensions to HTML 4.0//EN"
+ "hmpro4.dtd">
+
+<HTML>
+  
+  <HEAD>
+    <TITLE>Navigation bar</TITLE>
+  <style type="text/css">
+<!--
+a {  font-family: Arial, Helvetica, sans-serif; font-size: 12pt; color: #FFCC00; text-decoration: none; font-weight: bold}
+h4 {  font-family: Arial, Helvetica, sans-serif; color: #00CC00; font-weight: normal; text-decoration: none; font-size: 8pt; text-align: left}
+-->
+</style>
+  <script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+  <script language="JavaScript">
+<!--
+function MM_goToURL() { //v1.2
+  for (var i=0; i< (MM_goToURL.arguments.length - 1); i+=2) //with arg pairs
+    eval(MM_goToURL.arguments[i]+".location='"+MM_goToURL.arguments[i+1]+"'");
+  document.MM_returnValue = false;
+}
+//-->
+</script>
+  <script language="JavaScript">
+<!--
+function MM_preloadImages() { //v1.2
+  if (document.images) {
+    var imgFiles = MM_preloadImages.arguments;
+    var preloadArray = new Array();
+    for (var i=0; i<imgFiles.length; i++) {
+      preloadArray[i] = new Image;
+      preloadArray[i].src = imgFiles[i];
+    }
+  }
+}
+
+function MM_swapImage() { //v1.2
+  var i,j=0,objStr,obj,swapArray=new Array,oldArray=document.MM_swapImgData;
+  for (i=0; i < (MM_swapImage.arguments.length-2); i+=3) {
+    objStr = MM_swapImage.arguments[(navigator.appName == 'Netscape')?i:i+1];
+    if ((objStr.indexOf('document.layers[')==0 && document.layers==null) ||
+        (objStr.indexOf('document.all[')   ==0 && document.all   ==null))
+      objStr = 'document'+objStr.substring(objStr.lastIndexOf('.'),objStr.length);
+    obj = eval(objStr);
+    if (obj != null) {
+      swapArray[j++] = obj;
+      swapArray[j++] = (oldArray==null || oldArray[j-1]!=obj)?obj.src:oldArray[j];
+      obj.src = MM_swapImage.arguments[i+2];
+  } }
+  document.MM_swapImgData = swapArray; //used for restore
+}
+//-->
+</script>
+  <script language="JavaScript">
+<!--
+function MM_swapImgRestore() { //v1.2
+  if (document.MM_swapImgData != null)
+    for (var i=0; i<(document.MM_swapImgData.length-1); i+=2)
+      document.MM_swapImgData[i].src = document.MM_swapImgData[i+1];
+}
+//-->
+</script>
+</HEAD>
+  
+  
+<BODY bgcolor="#000000">
+<!-- #BeginBehavior MM_swapImage13 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/email2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage13 --> <!-- #BeginBehavior MM_swapImage12 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/book2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage12 --> <!-- #BeginBehavior MM_swapImage11 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/music2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage11 --> <!-- #BeginBehavior MM_swapImage10 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/sport2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage10 --> <!-- #BeginBehavior MM_swapImage9 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/shopp2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage9 --> <!-- #BeginBehavior MM_swapImage8 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/restaur2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage8 --> <!-- #BeginBehavior MM_swapImage7 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/import2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage7 --> <!-- #BeginBehavior MM_swapImage6 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/beaches2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage6 --> <!-- #BeginBehavior MM_swapImage5 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/tour2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage5 --> <!-- #BeginBehavior MM_swapImage4 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/culture2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage4 --> <!-- #BeginBehavior MM_swapImage3 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/clime2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage3 --> <!-- #BeginBehavior MM_swapImage2 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/geograf2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage2 --> <!-- #BeginBehavior MM_swapImage1 --> 
+<script language='JavaScript'>
+  MM_preloadImages('images/history2.gif');
+</script>
+<!-- #EndBehavior MM_swapImage1 --> 
+<div id="navbar" style="position:absolute; width:76px; height:227px; z-index:3; left: 0px; top: 10px; visibility: visible"> 
+  <table border="0" width="110" align="left" cellspacing="0" cellpadding="0">
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.hist1','document.hist1','images/history2.gif','MM_swapImage1');MM_showHideLayers('document.layers[\'history\']','document.all[\'history\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'history\']','document.all[\'history\']','hide')" onClick="MM_goToURL('parent.main','../history/index.htm','parent.rec','../images/reklame/02/index.htm');return document.MM_returnValue"><img src="images/history1.gif" width="109" height="17" name="hist1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.geo1','document.geo1','images/geograf2.gif','MM_swapImage2');MM_showHideLayers('document.layers[\'geomali\']','document.all[\'geomali\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'geomali\']','document.all[\'geomali\']','hide')" onClick="MM_goToURL('parent.main','../geography/index.htm','parent.rec','../images/reklame/03/index.htm');return document.MM_returnValue"><img src="images/geograf1.gif" width="109" height="17" name="geo1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.clime1','document.clime1','images/clime2.gif','MM_swapImage3');MM_showHideLayers('document.layers[\'weather\']','document.all[\'weather\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'weather\']','document.all[\'weather\']','hide')" onClick="MM_goToURL('parent.main','../clime/index.htm','parent.rec','../images/reklame/04/index.htm');return document.MM_returnValue"><img src="images/clime1.gif" width="109" height="17" name="clime1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.cult','document.cult','images/culture2.gif','MM_swapImage4');MM_showHideLayers('document.layers[\'culture\']','document.all[\'culture\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'culture\']','document.all[\'culture\']','hide')" onClick="MM_goToURL('parent.main','../culture/index.htm','parent.rec','../images/reklame/05/index.htm');return document.MM_returnValue"><img src="images/culture1.gif" width="109" height="17" name="cult" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.photo1','document.photo1','images/tour2.gif','MM_swapImage5');MM_showHideLayers('document.layers[\'photo\']','document.all[\'photo\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'photo\']','document.all[\'photo\']','hide')" onClick="MM_goToURL('parent.main','../tour/index.htm','parent.rec','../images/reklame/06/index.htm');return document.MM_returnValue"><img src="images/tour1.gif" width="109" height="17" name="photo1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.beach1','document.beach1','images/beaches2.gif','MM_swapImage6');MM_showHideLayers('document.layers[\'beaches\']','document.all[\'beaches\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'beaches\']','document.all[\'beaches\']','hide')" onClick="MM_goToURL('parent.main','../beaches/index.htm','parent.rec','../images/reklame/07/index.htm');return document.MM_returnValue"><img src="images/beaches1.gif" width="109" height="17" name="beach1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.imp','document.imp','images/import2.gif','MM_swapImage7');MM_showHideLayers('document.layers[\'nightlife\']','document.all[\'nightlife\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'nightlife\']','document.all[\'nightlife\']','hide')" onClick="MM_goToURL('parent.main','../importa/index.htm','parent.rec','../images/reklame/08/index.htm');return document.MM_returnValue"><img src="images/import1.gif" width="109" height="17" name="imp" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.rest','document.rest','images/restaur2.gif','MM_swapImage8');MM_showHideLayers('document.layers[\'restaurants\']','document.all[\'restaurants\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'restaurants\']','document.all[\'restaurants\']','hide')" onClick="MM_goToURL('parent.main','../restaurants/index.htm','parent.rec','../images/reklame/09/index.htm');return document.MM_returnValue"><img src="images/restaur1.gif" width="109" height="17" name="rest" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.shop','document.shop','images/shopp2.gif','MM_swapImage9');MM_showHideLayers('document.layers[\'shoping\']','document.all[\'shoping\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'shoping\']','document.all[\'shoping\']','hide')" onClick="MM_goToURL('parent.main','../shopping/index.htm','parent.rec','../images/reklame/10/index.htm');return document.MM_returnValue"><img src="images/shopp1.gif" width="109" height="17" name="shop" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.sport1','document.sport1','images/sport2.gif','MM_swapImage10');MM_showHideLayers('document.layers[\'sport\']','document.all[\'sport\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'sport\']','document.all[\'sport\']','hide')" onClick="MM_goToURL('parent.main','../sport/index.htm','parent.rec','../images/reklame/11/index.htm');return document.MM_returnValue"><img src="images/sport1.gif" width="109" height="17" name="sport1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.music1','document.music1','images/music2.gif','MM_swapImage11');MM_showHideLayers('document.layers[\'important\']','document.all[\'important\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'important\']','document.all[\'important\']','hide')" onClick="MM_goToURL('parent.main','../music/index.htm','parent.rec','../images/reklame/12/index.htm');return document.MM_returnValue"><img src="images/music1.gif" width="109" height="17" name="music1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="#" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.book1','document.book1','images/book2.gif','MM_swapImage12');MM_showHideLayers('document.layers[\'tips\']','document.all[\'tips\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'tips\']','document.all[\'tips\']','hide')" onClick="MM_goToURL('parent.main','../book/index.htm','parent.rec','../images/reklame/01/index.htm');return document.MM_returnValue"><img src="images/book1.gif" width="109" height="17" name="book1" border="0"></a></td>
+    </tr>
+    <tr> 
+      <td><a href="mailto:sasa@maptel.es" onMouseOver="MM_swapImage('document.layers[\'navbar\'].document.email1','document.email1','images/email2.gif','MM_swapImage13');MM_showHideLayers('document.layers[\'email\']','document.all[\'email\']','show')" onMouseOut="MM_swapImgRestore();MM_showHideLayers('document.layers[\'email\']','document.all[\'email\']','hide')"><img src="images/email1.gif" width="109" height="17" name="email1" border="0"></a></td>
+    </tr>
+  </table>
+</div>
+<div id="history" style="position:absolute; left:5px; top:255px; width:100px; height:56px; z-index:2; visibility: hidden"> 
+  <h4 align="left">The history of Canary people and their land. Time of Aborigines 
+    and colonization.</h4>
+</div>
+<div id="geomali" style="position:absolute; left:5px; top:255px; width:103px; height:106px; z-index:4; visibility: hidden"> 
+  <h4 align="left">Geo. location of Gran Canaria and some details about relief, 
+    origin &amp; life.</h4>
+</div>
+<div id="weather" style="position:absolute; left:5px; top:255px; width:106px; height:123px; z-index:5; visibility: hidden"> 
+  <h4 align="left">Weather situation in and around of island. Global and specific 
+    elements. Weather forrecast</h4>
+</div>
+<div id="culture" style="position:absolute; left:5px; top:255px; width:108px; height:149px; z-index:6; visibility: hidden"> 
+  <h4 align="left">Few notes about canarian people. Their art and culture</h4>
+</div>
+<div id="photo" style="position:absolute; left:5px; top:255px; width:108px; height:133px; z-index:7; visibility: hidden"> 
+  <h4 align="left">Photo tour of most important places and cities on island</h4>
+</div>
+<div id="beaches" style="position:absolute; left:5px; top:255px; width:106px; height:141px; z-index:8; visibility: hidden"> 
+  <h4 align="left">Information's about most and least important beaches here</h4>
+</div>
+<div id="nightlife" style="position:absolute; left:5px; top:255px; width:105px; height:139px; z-index:9; visibility: hidden"> 
+  <h4 align="left">Few important notes and telephone numbers. Also medical service</h4>
+</div>
+<div id="restaurants" style="position:absolute; left:5px; top:255px; width:104px; height:132px; z-index:10; visibility: hidden"> 
+  <h4 align="left">Where to go to eat? Hundreds of restaurants. This is my choice. 
+  </h4>
+</div>
+<div id="shoping" style="position:absolute; left:5px; top:255px; width:106px; height:147px; z-index:11; visibility: hidden"> 
+  <h4 align="left">Duty free shopping, extra prices and so on, but not also perfumes. 
+  </h4>
+</div>
+<div id="important" style="position:absolute; left:5px; top:255px; width:107px; height:134px; z-index:13; visibility: hidden"> 
+  <h4 align="left">Interested in Spanisn music? Here is few interesting CD to 
+    by. </h4>
+</div>
+<div id="sport" style="position:absolute; left:5px; top:255px; width:104px; height:114px; z-index:12; visibility: hidden"> 
+  <h4 align="left">If you like sun and sport, this is place for you</h4>
+</div>
+<div id="email" style="position:absolute; left:5px; top:255px; width:108px; height:119px; z-index:15; visibility: hidden"> 
+  <h4 align="left">Please sent your comments or some questions about Gran Canaria</h4>
+</div>
+<div id="tips" style="position:absolute; left:5px; top:255px; width:107px; height:131px; z-index:14; visibility: hidden"> 
+  <h4 align="left">By recommended books about Gran Canaria. In association with 
+    Amazon.com</h4>
+</div>
+<div id="image" style="position:absolute; left:8px; top:330px; width:83px; height:71px; z-index:16; visibility: visible"> 
+  <a href="../book/index.htm" target="main"> <img src="images/findrelated.gif" border="0" alt="In Association with Amazon.com"></a></div>
+</BODY>
+</HTML>

@@ -1,0 +1,12 @@
+body {  background-color: #FFFFFF; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; background-image: url(../fondo.gif); background-repeat: no-repeat; background-position: left top; background-attachment: scroll}
+.menu1 {  border: 1px #000000 solid; text-align: center; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; background-color: #CC9999}
+a { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #FFFFFF; border: none; text-decoration: none}
+a:hover { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #000000; border: none; text-decoration: underline}
+.menu2 { border: none; text-align: center; font-size: 12px; color: #FFFFFF; background-color: #CCCC99}
+.tablamarco {  padding-top: 15px; padding-bottom: 15px; padding-left: 15px; border: 1px #000000 dashed}
+p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #666666; text-align: justify; padding-right: 15px}
+.menu3 { border: 1px #000000 solid; text-align: center; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px ; font-size: 12px; font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: normal; background-color: #FFFFFF}
+.copyright {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-weight: lighter; color: #CCCCCC; text-decoration: none; text-align: right; border: 1px #CCCCCC solid; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px}
+.naslovparagrafa { font-family: "Times New Roman", Times, serif; font-size: 28px; font-weight: lighter; color: #CC9966; font-style: italic}
+.images { border: 2px #000000 solid }
+.links { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #000000; border: none; text-decoration: none}

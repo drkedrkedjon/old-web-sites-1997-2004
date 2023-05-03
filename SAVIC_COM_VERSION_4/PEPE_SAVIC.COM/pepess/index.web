@@ -1,0 +1,103 @@
+TP:galeria de graffitis
+CF:#FFFFFF
+CT:#000000
+CE:#0000FF
+CV:#800080
+CA:#FF0000
+IF:Amarillo.jpg
+IR:C:\Archivos de programa\WebPro1.1.0\Fondos\Amarillo.jpg
+IJ:1
+SF:YENSI.mid
+SR:C:\Archivos de programa\WebPro1.1.0\Midi\YENSI.mid
+MI:0
+MD:GRAFFITI EN PAPAEL
+MA:jose suares
+MK:personal, página, homepage, GRAFFITI.
+ST:
+FF:
+~~@1.dat
+aImagen
+lblImagenSeleccionada=welcome2.gif
+chkSaltoAntes=0
+chkSaltoDespues=0
+chkCentrado=1
+TextoALT=
+TextoLINK=
+
+~~@2.dat
+aImagen
+lblImagenSeleccionada=favorito.gif
+chkSaltoAntes=0
+chkSaltoDespues=0
+chkCentrado=1
+TextoALT=
+TextoLINK=
+
+~~@3.dat
+aTexto
+optNormal=Verdadero
+optNegrita=False
+chkCursiva=0
+optPequeño=False
+optStandard=False
+optGrande=Verdadero
+optMuyGrande=False
+lstFuente=
+chkLinea=1
+chkSaltoAntes=1
+chkSaltoDespues=1
+optIzquierda=Verdadero
+optCentrado=False
+optDerecha=False
+colRGBvalor=#000000
+selImagenTxt=02.jpg
+ESTE CUADRO  ESTA HECHO CON  MUEVAS TECMICAS DE PINTAR(SPRAY)
+
+
+~~@4.dat
+aLinks
+TituloLINKS=Te recomiendo que visites las siguientes páginas de Internet(PICA AQUI)
+l1=http://pepe.savic.com
+n1=GALERIA:
+d1=EXPOSICION DE CUADROS PINTADOS CON.(SPRAY)
+l2=http://web.jet.es/~pedroh/counter/counter.html
+n2=PARA TU WEB:
+d2=SERVICIO DE CONTADORES
+l3=
+n3=
+d3=
+l4=
+n4=
+d4=
+l5=
+n5=
+d5=
+chkLinea=0
+
+~~@5.dat
+aHTML
+<<IMG SRC="http://web.jet.es/~pedroh/counter/contador.cgi?pepe/f/2">
+<a href="http://es.nedstat.net/cgi-bin/viewstat?name=pepess">
+<img src="http://es.nedstat.net/cgi-bin/nedstat.gif?name=pepess" border=0 alt="" width=22 height=22></a>
+
+
+~~@6.dat
+aEMAIL
+TextoEMAIL=Puedes escribirme a mi dirección de E-MAIL:
+DireccionEMAIL=pepess@accesosis.es
+chkCentrado=1
+chkLineaAntes=0
+chkLineaDespues=0
+selImagenTxt=email3.gif
+optIzquierda=Verdadero
+optCentro=False
+
+~~@7.dat
+aImagen
+lblImagenSeleccionada=ani_busom  010.gif
+chkSaltoAntes=0
+chkSaltoDespues=0
+chkCentrado=1
+TextoALT=
+TextoLINK=
+

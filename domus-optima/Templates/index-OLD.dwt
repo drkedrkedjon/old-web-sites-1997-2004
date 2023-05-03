@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Domus Óptima</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link href="../images/main.css" rel="stylesheet" type="text/css" />
+<script src="../SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+<link href="../SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../roundedcorners/niftycube.js"></script>
+<link href="../roundedcorners/niftyCorners.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div#wrapper","big","transparency");
+}
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="header">      <a href="../index.html"><img src="../images/logo-casitas.jpg" alt="Header with tel: 929 012 138" width="880" height="135" /></a></div>
+  <div id="navbar">
+    <ul id="MenuBar1" class="MenuBarHorizontal">
+      <li><a class="MenuBarItemSubmenu" href="#">Domus &Oacute;ptima</a>
+    <ul>
+            <li><a href="../la_empresa.html">La Empresa</a></li>
+            <li><a href="../aviso_legal.html">Aviso Legal</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="MenuBarItemSubmenu">Construcción y Vivienda</a>
+        <ul>
+          <li><a href="../trenzametal/trenzametal.html">TrenzaMetal</a></li>
+          <li><a href="../tubmetal/index.html">TubMetal</a></li>
+          <li><a href="../aspiracioncentralizada/index.html">Aspiración Centralizada</a></li>
+          <li><a href="../postesados-pretensados/index.html">Postesados y Pretensados</a></li>
+        </ul>
+      </li>
+  <li><a class="MenuBarItemSubmenu" href="#">Equipamientos Urbanos</a>
+  <ul>
+                <li><a href="../trenzametalarea/index.html">TrenzaMetal Área</a>                </li>
+          <li><a href="../zigmetal/index.html">ZigMetal</a></li>
+          <li><a href="../contenedores-soterrados/index.html">Contenedores Soterrados</a></li>
+        </ul>
+      </li>
+      <li><a href="../galeria/index.html">Galería de Imagenes</a>      </li>
+      <li><a href="../e_mail.html">Contacta con Nosotros</a>      </li>
+    </ul>
+  </div>
+  <div id="content">
+  
+  
+    <div class="promocontainer">
+      <div class="promofield">
+        <p><a href="../trenzametal/trenzametal.html"><img src="../trenzametal/images/homepage/logotrenzametal.jpg" alt="imagen" width="110" height="110" align="left" /></a><strong>TrenzaMetal</strong> Un robusto trenzado en  pletinas de acero al carbono sirve como base para  múltiples <a href="../trenzametal/trenzametal.html">aplicaciones como cerramientos, balcones o celosías</a>… etc., empleadas en arquitectura.</p>
+      </div>
+      <div class="promofield"><a href="../aspiracioncentralizada/index.html"><img src="../aspiracioncentralizada/images/logohomepage.jpg" alt="imagen" width="140" height="84" align="left" /></a>
+        <p>Este sistema de <a href="../aspiracioncentralizada/index.html">Aspiración Centralisada</a> se apoya en un funcionamiento muy sencillo. Se trata de separar  la central de aspiración de la manguera flexible y unirlas a través de un sistema “invisible” de tuberías con tomas, repartidas estratégicamente por la casa, en sus extremos... </p>
+      </div>
+      
+      <div class="promofield">
+        <p><strong><a href="../tubmetal/index.html"><img src="../tubmetal/images/logoTUBMETAL-HOMEPAGE.jpg" alt="imagen" width="110" height="110" align="left" /></a>NEX</strong> y <strong>NUMEN</strong> son una <a href="../tubmetal/index.html">amplia gama de protecciones verticales</a> (barandillas, balcones, vallas, celosías, mamparas, etc.) en aluminio tubular diseñadas expresamente para edificación y urbanismo.</p>
+      </div>
+      <div class="promofield">
+        <p><a href="../postesados-pretensados/index.html"><img src="../postesados-pretensados/images/DSI-logo-home.jpg" alt="imagen" width="110" height="55" align="left" /></a><a href="../postesados-pretensados/index.html">El pretensado</a>, técnica habitual en la ingeniería civil y ampliamente desarrollada en España en la construcción de puentes, sigue siendo un gran desconocido dentro del campo de la edificación.<br />
+        </p>
+      </div>
+      
+    </div>
+    <div class="promocontainer">
+      <div class="promofield">
+        <h1>Diseño, Ser Diferente...</h1>
+        <p><a href="../la_empresa.html">Domus Òptima</a> es una empresa dedicada a la comercialización, distribución e instalación de productos destinados al mobiliario urbano y a la vivienda. Nace como respuesta a la creciente demanda de calidad y eficiencia y con el objetivo de poner al alcance de nuestros clientes, en todo el Archipiélago Canario, las mejores ofertas del mercado.</p>
+      </div>
+      <div class="promofield">
+        <p><a href="../contenedores-soterrados/index.html"><img src="../contenedores-soterrados/images/logosolrieHOME.jpg" alt="imagen" width="160" height="42" align="left" /></a>Los <a href="../contenedores-soterrados/index.html">contenedores de basura subterráneos</a> facilitan la recogida selectiva deresiduos para su posterior reciclaje contribuyendo de forma activa a la protección del medio ambiente.</p>
+      </div>
+      
+      <div class="promofield">
+        <p><a href="../zigmetal/index.html"><img src="../zigmetal/images/logozigmetalINDEX.jpg" alt="imagen" width="120" height="72" align="left" /></a>Es un sistema modular funcional, abierto, listo para instalar con múltiples prestaciones y de rigurosa calidad. <a href="../zigmetal/index.html">Barandillas, antepechos, bolardos, barreras y bordes de jardín</a></p>
+      </div>
+      <div class="promofield">
+        <p><a href="../trenzametalarea/index.html"><img src="../trenzametalarea/imagenes/logoINDEX.jpg" alt="imagen" width="125" height="56" align="left" /></a>La línea de <a href="../trenzametalarea/index.html">protecciones para espacios públicos</a>, creada por Trenza Metal Área, consiste en sistemas modulares funcionales, listos para instalar con múltiples prestaciones y de rigurosa calidad.</p>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <p><br />      
+      - &copy; Todos los derechos reservados 2008 por Domus Óptima&#8482; -<br />
+      - Todas las marcas son propiedad de los fabricantes y estan usados con permisos -<br />
+    - Cualquiera reproduction o copia de esta web esta prohibida -</p>
+  </div>
+</div>
+<script type="text/javascript">
+<!--
+var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"../SpryAssets/SpryMenuBarDownHover.gif", imgRight:"../SpryAssets/SpryMenuBarRightHover.gif"});
+//-->
+</script>
+</body>
+</html>

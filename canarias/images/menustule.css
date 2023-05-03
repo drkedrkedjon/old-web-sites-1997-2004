@@ -1,0 +1,9 @@
+/* CoolMenus 4 - default styles - do not edit */
+.clCMEvent{position:absolute; width:99%; height:99%; clip:rect(0,100%,100%,0); left:0; top:0; visibility:visible}
+.clCMAbs{position:absolute; visibility:hidden; left:0; top:0}
+/* CoolMenus 4 - default styles - end */
+  
+/*Styles for level 0*/
+.clLevel0,.clLevel0over{position:absolute; padding:0px; font-family:verdana,arial,helvetica; font-size:10px; font-weight:normal}
+.clLevel0{color:#663300; background-color:#cccc99; layer-background-color:#cccc99;}
+.clLevel0over{background-color:#ffffcc; layer-background-color:#ffffcc; color:#000000; cursor:pointer; cursor:hand; }

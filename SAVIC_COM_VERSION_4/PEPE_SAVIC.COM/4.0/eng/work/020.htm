@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <script language="JavaScript">
+<!--
+function MM_preloadImages() { //v1.2
+  if (document.images) {
+    var imgFiles = MM_preloadImages.arguments;
+    var preloadArray = new Array();
+    for (var i=0; i<imgFiles.length; i++) {
+      preloadArray[i] = new Image;
+      preloadArray[i].src = imgFiles[i];
+    }
+  }
+}
+
+function MM_swapImage() { //v1.2
+  var i,j=0,objStr,obj,swapArray=new Array,oldArray=document.MM_swapImgData;
+  for (i=0; i < (MM_swapImage.arguments.length-2); i+=3) {
+    objStr = MM_swapImage.arguments[(navigator.appName == 'Netscape')?i:i+1];
+    if ((objStr.indexOf('document.layers[')==0 && document.layers==null) ||
+        (objStr.indexOf('document.all[')   ==0 && document.all   ==null))
+      objStr = 'document'+objStr.substring(objStr.lastIndexOf('.'),objStr.length);
+    obj = eval(objStr);
+    if (obj != null) {
+      swapArray[j++] = obj;
+      swapArray[j++] = (oldArray==null || oldArray[j-1]!=obj)?obj.src:oldArray[j];
+      obj.src = MM_swapImage.arguments[i+2];
+  } }
+  document.MM_swapImgData = swapArray; //used for restore
+}
+//-->
+</script>
+  <script language="JavaScript">
+<!--
+function MM_swapImgRestore() { //v1.2
+  if (document.MM_swapImgData != null)
+    for (var i=0; i<(document.MM_swapImgData.length-1); i+=2)
+      document.MM_swapImgData[i].src = document.MM_swapImgData[i+1];
+}
+//-->
+</script>
+</HEAD>
+
+<BODY BGCOLOR="#000000" background="../../images/b12.jpg" text="#FFFFFF">
+<!-- #BeginBehavior MM_swapImage2 --> 
+<script language='JavaScript'>
+  MM_preloadImages('../../images/prevon.gif');
+</script>
+<!-- #EndBehavior MM_swapImage2 --> <!-- #BeginBehavior MM_swapImage1 --> 
+<script language='JavaScript'>
+  MM_preloadImages('../../images/nexton.gif');
+</script>
+<!-- #EndBehavior MM_swapImage1 --> 
+<table border="0" width="600" align="center" cellspacing="0" cellpadding="5">
+  <tr>
+    <td align="right" valign="top"><a href="019.htm" onMouseOver="MM_swapImage('document.prev','document.prev','../../images/prevon.gif','MM_swapImage2')" onMouseOut="MM_swapImgRestore()" target="fotos"><img src="../../images/prevof.gif" width="100" height="70" name="prev" border="0"></a></td>
+    <td align="center" valign="top"><img src="../../images/works/10.jpg" width="373" height="234"><br>
+      Ref 020</td>
+    <td align="left" valign="top"><a href="021.htm" onMouseOver="MM_swapImage('document.next','document.next','../../images/nexton.gif','MM_swapImage1')" onMouseOut="MM_swapImgRestore()" target="fotos"><img src="../../images/nextof.gif" width="100" height="70" name="next" border="0"></a></td>
+  </tr>
+</table>
+</BODY>
+</HTML>

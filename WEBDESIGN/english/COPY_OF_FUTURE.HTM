@@ -1,0 +1,143 @@
+<HTML>
+<HEAD>
+<TITLE>Untitled Document</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+  <script language="JavaScript">
+<!--
+function AW_SlideLayer(layerName,x,y,step,delay,NSpath,IEpath) { //v1.0
+	var isNav, isIE 	
+	if (parseInt(navigator.appVersion) >= 4) { 	
+	   if (navigator.appName == 'Netscape') { 	
+	      isNav = true 	
+	   } else { 		
+	      isIE = true 	
+	   } 				
+	} 					
+	if(NSpath =='') {	
+		if(isIE){ eval('var theLayer='+layerName)}	
+		else{ eval('var theLayer=document.'+layerName)	}
+		}	
+	else{	
+		if(isIE){ eval('var theLayer='+IEpath)}	
+		else{ eval('var theLayer='+NSpath)	}
+		}	
+		var changed=false 
+							
+	if(isNav){		
+		if(eval(theLayer.moving)) { clearTimeout(theLayer.timerid) }	
+  							
+		if(theLayer.left > x) { theLayer.left-=eval(step); changed=true } 	
+		if(theLayer.left < x) { theLayer.left+=eval(step); changed=true } 	
+		if(theLayer.top > y) { theLayer.top-=eval(step); changed=true }  	
+		if(theLayer.top < y) { theLayer.top+=eval(step); changed=true } 	
+		if (changed){   
+			theLayer.moving = true   
+			theLayer.timerid = setTimeout('AW_SlideLayer("'+layerName+'","'+x+'","'+y+'","'+step+'","'+delay+'","'+NSpath+'","'+IEpath+'")',delay)	
+	 
+			} 
+		else {theLayer.moving=false}  
+		 
+		} 
+	else{		
+		if(eval(theLayer.moving)) { clearTimeout(theLayer.timerid) }	
+  							
+		if(theLayer.style.pixelLeft > x) { theLayer.style.pixelLeft-=eval(step); changed=true } 	
+		if(theLayer.style.pixelLeft < x) { theLayer.style.pixelLeft+=eval(step); changed=true } 	
+		if(theLayer.style.pixelTop > y) { theLayer.style.pixelTop-=eval(step); changed=true }  	
+		if(theLayer.style.pixelTop < y) { theLayer.style.pixelTop+=eval(step); changed=true } 	
+		if (changed){   
+			theLayer.moving = true   
+			theLayer.timerid = setTimeout('AW_SlideLayer("'+layerName+'","'+x+'","'+y+'","'+step+'","'+delay+'","'+NSpath+'","'+IEpath+'")',delay)	
+			} 
+		else {theLayer.moving=false}  
+		 
+		} 
+	document.MM_returnValue=false;	
+	theLayer.document.MM_returnValue=false; 
+}
+//-->
+</script>
+  
+<script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+
+function MM_popupMsg(theMsg) { //v2.0
+  alert(theMsg);
+}
+//-->
+</script>
+<link rel="stylesheet" href="../images/stylebasico.css"></HEAD>
+
+<BODY onLoad="AW_SlideLayer('cont','25','210','5','','','');AW_SlideLayer('exampl','50','190','5','','','');AW_SlideLayer('serv','75','170','5','','','');AW_SlideLayer('portf','100','150','5','','','');AW_SlideLayer('futurelink','125','130','5','','','');AW_SlideLayer('why','150','110','5','','','');AW_SlideLayer('home','175','90','5','','','');MM_showHideLayers('document.layers[\'mokesignde\']','document.all[\'mokesignde\']','show','document.layers[\'home\']','document.all[\'home\']','show','document.layers[\'why\']','document.all[\'why\']','show','document.layers[\'futurelink\']','document.all[\'futurelink\']','show','document.layers[\'portf\']','document.all[\'portf\']','show','document.layers[\'serv\']','document.all[\'serv\']','show','document.layers[\'exampl\']','document.all[\'exampl\']','show','document.layers[\'cont\']','document.all[\'cont\']','show','document.layers[\'deka\']','document.all[\'deka\']','show','document.layers[\'beck\']','document.all[\'beck\']','show','document.layers[\'text\']','document.all[\'text\']','show','document.layers[\'copyright\']','document.all[\'copyright\']','show');return document.MM_returnValue">
+<div id="mokesignde" style="position:absolute; visibility:hidden; width:437px; height:67px; z-index:5; left: -36px; top: 15px"> 
+  <table border="0" width="500" cellpadding="0" cellspacing="0" hspace="0" vspace="0">
+    <tr> 
+      <td> 
+        <p>&lt;|moKE signDE|&gt;<br>
+          <span class="ideshost">&nbsp;&nbsp;internet, design &amp; editing of 
+          web sites&nbsp;&nbsp;</span></p>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="home" style="position:absolute; visibility:hidden; left:355px; top:90px; width:133px; height:7px; z-index:7"><a href="index.htm"><< 
+  home page</a></div>
+<div id="why" style="position:absolute; visibility:hidden; left:355px; top:110px; width:153px; height:16px; z-index:8"><a href="whyinternet.htm"> 
+  &lt;&lt; why internet</a></div>
+<div id="futurelink" style="position:absolute; visibility:hidden; left:355px; top:130px; width:198px; height:12px; z-index:9"><a href="future.htm"> 
+  &lt;&lt; future of internet</a></div>
+<div id="portf" style="position:absolute; visibility:hidden; left:355px; top:150px; width:137px; height:17px; z-index:9"><a href="#" onClick="MM_popupMsg('To lazy to write down, sory...')"> 
+  &lt;&lt; portfolio</a></div>
+<div id="serv" style="position:absolute; visibility:hidden; left:355px; top:170px; width:126px; height:14px; z-index:11"><a href="services.htm"> 
+  &lt;&lt; services</a></div>
+<div id="exampl" style="position:absolute; visibility:hidden; left:355px; top:190px; width:120px; height:12px; z-index:12"><a href="examples.htm"> 
+  &lt;&lt; examples</a></div>
+<div id="cont" style="position:absolute; visibility:hidden; left:355px; top:210px; width:117px; height:15px; z-index:13"><a href="contact.htm"> 
+  &lt;&lt; contact</a></div>
+<div id="deka" style="position:absolute; left:354px; top:90px; width:188px; height:140px; z-index:14; visibility: hidden"> 
+  <table border="0" width="200" cellspacing="0" hspace="0" vspace="0" bgcolor="#666666">
+    <tr> 
+      <td width="18" class="ideshostnavbar"> f<br>
+        u<br>
+        t<br>
+        u<br>
+        r<br>
+        e</td>
+      <td width="178"><img src="../images/spacer.gif" width="180" height="155"></td>
+    </tr>
+  </table>
+</div>
+<div id="text" style="position:absolute; visibility:hidden; left:45px; top:264px; width:468px; height:68px; z-index:3"> 
+  <h2>fdfgdfgdfgd oiuh&ntilde; y&ntilde; auyds &ntilde;auysd &ntilde;audya 
+    ad &ntilde;aud&ntilde; auyg ay g&ntilde;aydg &ntilde;adiuyg&ntilde;a dyg aygyga 
+    yag auhga iayfg fyg fygaoyg a a gyafyg a aofyg a g aofgya yfg af yaf gy adfigy 
+    a&acute;&acute;difgy a&acute;fyg a&acute;df yg aifyg afyg a yfhufdgys sy ufdg 
+    sfdugy sifyg s&acute;hiyfd s&acute;fid sf iuihfdsui s&ntilde;df oiudsfg soiyg 
+    sy siodfg sifg sdify isfg sidfg ydisfyg sd&acute;fiyg s&acute;fdi s&acute;dfygi 
+    sfdi8gy s&acute;fuy &acute;9f sfug s&iacute;ugfy afy s&uacute;fy s&acute;9fduh 
+    s9fdu a9fu a&acute;f9duhg a&acute;9fu &aacute;9fu a9dfu af afuh a&acute;fdu 
+    a9fu a9 a&acute;9f a&acute;9fd &aacute;9ufrgois ssifg sif&acute;sfdiug a uapaufgu 
+    afdu<br>
+    odfiouyfy fdoy ofiyafdhiaf fsf ufygi afgadfigy afgiyafg af giy fdigya oifdg 
+    af agiafdigya pdfugiy ad&iacute;fg adfyg aifyg afgoiyaf gy aafdgyi</h2>
+</div>
+<div id="copyright" style="position:absolute; left:386px; top:133px; width:189px; height:24px; z-index:16; visibility: hidden"><span class="copuright"> 
+  | |&nbsp;&copy; moKE signDE 1997 - 2002&nbsp;|</span></div>
+</BODY>
+</HTML>

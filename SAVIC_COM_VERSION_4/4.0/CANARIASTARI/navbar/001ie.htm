@@ -1,0 +1,107 @@
+
+<HTML>
+  
+  <HEAD>
+    <TITLE>Navigation bar</TITLE>
+  <style type="text/css">
+<!--
+a {  font-family: Arial, Helvetica, sans-serif; font-size: 12pt; color: #FFCC00; text-decoration: none; font-weight: bold}
+h4 {  font-family: Arial, Helvetica, sans-serif; color: #FFFF00; font-weight: normal; text-decoration: none; font-size: 8pt; text-align: left}
+-->
+</style>
+  <script language="JavaScript">
+<!--
+function MM_showHideLayers() { //v1.2
+  var i, visStr, args, theObj;
+  args = MM_showHideLayers.arguments;
+  for (i=0; i<(args.length-2); i+=3) { //with arg triples (objNS,objIE,visStr)
+    visStr   = args[i+2];
+    if (navigator.appName == 'Netscape' && document.layers != null) {
+      theObj = eval(args[i]);
+      if (theObj) theObj.visibility = visStr;
+    } else if (document.all != null) { //IE
+      if (visStr == 'show') visStr = 'visible'; //convert vals
+      if (visStr == 'hide') visStr = 'hidden';
+      theObj = eval(args[i+1]);
+      if (theObj) theObj.style.visibility = visStr;
+  } }
+}
+//-->
+</script>
+  <script language="JavaScript">
+<!--
+function MM_goToURL() { //v1.2
+  for (var i=0; i< (MM_goToURL.arguments.length - 1); i+=2) //with arg pairs
+    eval(MM_goToURL.arguments[i]+".location='"+MM_goToURL.arguments[i+1]+"'");
+  document.MM_returnValue = false;
+}
+//-->
+</script>
+</HEAD>
+  
+  
+<BODY bgcolor="#996600" text="#FFFFFF">
+<div id="history" style="position:absolute; left:5px; top:255px; width:100px; height:56px; z-index:2; visibility: hidden"> 
+  <h4 align="left">The history of Canary people and their land. Time of Aborigines 
+    and colonization.</h4>
+</div>
+<div id="geomali" style="position:absolute; left:5px; top:255px; width:107px; height:56px; z-index:3; visibility: hidden"> 
+  <h4 align="left">Location of Gran Canaria and some details about relief, origin 
+    &amp; life.</h4>
+</div>
+<div id="weather" style="position:absolute; left:5px; top:255px; width:107px; height:55px; z-index:4; visibility: hidden"> 
+  <h4 align="left">Weather situation in and around of island. Global and specific 
+    elements.</h4>
+</div>
+<div id="culture" style="position:absolute; left:5px; top:255px; width:107px; height:47px; z-index:5; visibility: hidden"> 
+  <h4 align="left">Few notes about canarian people. Their art and culture</h4>
+</div>
+<div id="photo" style="position:absolute; left:5px; top:255px; width:107px; height:46px; z-index:6; visibility: hidden"> 
+  <h4 align="left">Photo tour of most important places and cities on island</h4>
+</div>
+<div id="beaches" style="position:absolute; left:5px; top:255px; width:107px; height:56px; z-index:7; visibility: hidden"> 
+  <h4 align="left">Information's about most and least important beaches here</h4>
+</div>
+<div id="important" style="position:absolute; left:5px; top:255px; width:107px; height:57px; z-index:8; visibility: hidden"> 
+  <h4 align="left">Few important notes and telephone numbers. Also medical service</h4>
+</div>
+<div id="restaurants" style="position:absolute; left:5px; top:255px; width:107px; height:61px; z-index:9; visibility: hidden"> 
+  <h4 align="left">Where to go to eat? Hundreds of restaurants. This is my choice. 
+  </h4>
+</div>
+<div id="shoping" style="position:absolute; left:5px; top:255px; width:107px; height:60px; z-index:10; visibility: hidden"> 
+  <h4 align="left">Duty free shopping, extra prices and so on, but not also perfumes. 
+  </h4>
+</div>
+<div id="cdstore" style="position:absolute; left:5px; top:255px; width:107px; height:45px; z-index:12; visibility: hidden"> 
+  <h4 align="left">Interested in Spanisn music? Here is few interesting CD to 
+    by. </h4>
+</div>
+<div id="sport" style="position:absolute; left:5px; top:255px; width:107px; height:45px; z-index:11; visibility: hidden"> 
+  <h4 align="left">If you like sun and sport, this is place for you</h4>
+</div>
+<div id="email" style="position:absolute; left:5px; top:255px; width:107px; height:57px; z-index:14; visibility: hidden"> 
+  <h4 align="left">Please sent your comments or some questions about Gran Canaria</h4>
+</div>
+<div id="books" style="position:absolute; left:5px; top:255px; width:107px; height:71px; z-index:13; visibility: hidden"> 
+  <h4 align="left">By recommended books about Gran Canaria. In association with 
+    Amazon.com</h4>
+</div>
+<div id="image" style="position:absolute; left:9px; top:333px; width:83px; height:71px; z-index:15; visibility: visible"> 
+  <a href="../book/index.htm" target="main"> <img src="images/findrelated.gif" border="0" alt="In Association with Amazon.com"></a></div>
+<div id="navbar" style="position:absolute; width:97px; height:115px; z-index:1; visibility: visible; left: 5px; top: 5px"><a href="#" onMouseOver="MM_showHideLayers('document.layers[\'history\']','document.all[\'history\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'history\']','document.all[\'history\']','hide')" onClick="MM_goToURL('parent.main','../history/index.htm','parent.rec','../images/reklame/02/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">History</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'geomali\']','document.all[\'geomali\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'geomali\']','document.all[\'geomali\']','hide')" onClick="MM_goToURL('parent.main','../geography/index.htm','parent.rec','../images/reklame/03/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Geography</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'weather\']','document.all[\'weather\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'weather\']','document.all[\'weather\']','hide')" onClick="MM_goToURL('parent.main','../clime/index.htm','parent.rec','../images/reklame/04/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Clime</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'culture\']','document.all[\'culture\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'culture\']','document.all[\'culture\']','hide')" onClick="MM_goToURL('parent.main','../culture/index.htm','parent.rec','../images/reklame/05/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Culture</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'photo\']','document.all[\'photo\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'photo\']','document.all[\'photo\']','hide')" onClick="MM_goToURL('parent.main','../tour/index.htm','parent.rec','../images/reklame/06/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Photo 
+  Tour</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'beaches\']','document.all[\'beaches\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'beaches\']','document.all[\'beaches\']','hide')" onClick="MM_goToURL('parent.main','../beaches/index.htm','parent.rec','../images/reklame/07/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Beaches</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'important\']','document.all[\'important\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'important\']','document.all[\'important\']','hide')" onClick="MM_goToURL('parent.main','../importa/index.htm','parent.rec','../images/reklame/08/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Important</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'restaurants\']','document.all[\'restaurants\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'restaurants\']','document.all[\'restaurants\']','hide')" onClick="MM_goToURL('parent.main','../restaurants/index.htm','parent.rec','../images/reklame/09/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Restaurants</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'shoping\']','document.all[\'shoping\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'shoping\']','document.all[\'shoping\']','hide')" onClick="MM_goToURL('parent.main','../shopping/index.htm','parent.rec','../images/reklame/10/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Shopping</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'sport\']','document.all[\'sport\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'sport\']','document.all[\'sport\']','hide')" onClick="MM_goToURL('parent.main','../sport/index.htm','parent.rec','../images/reklame/11/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Sport</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'cdstore\']','document.all[\'cdstore\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'cdstore\']','document.all[\'cdstore\']','hide')" onClick="MM_goToURL('parent.main','../music/index.htm','parent.rec','../images/reklame/12/index.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Musicstore</font></span></a><br>
+  <a href="#" onMouseOver="MM_showHideLayers('document.layers[\'books\']','document.all[\'books\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'books\']','document.all[\'books\']','hide')" onClick="MM_goToURL('parent.main','../book/index.htm','parent.rec','../images/reklame/06/le.htm');return document.MM_returnValue"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">Bookstore</font></span></a><br>
+  <a href="mailto:sasa@maptel.es" onMouseOver="MM_showHideLayers('document.layers[\'email\']','document.all[\'email\']','show')" onMouseOut="MM_showHideLayers('document.layers[\'email\']','document.all[\'email\']','hide')"><span><font onMouseOver="this.style.color='#FFFFFF'"onmouseout="this.style.color=''">E-Mail</font></span></a></div>
+</BODY>
+</HTML>

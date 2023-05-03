@@ -1,0 +1,207 @@
+<html>
+<head>
+	<title>www.savic.com</title>
+
+<style type="text/css">
+<!--
+p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #999900; text-decoration: none; text-align: justify}
+h1 {  font-family: "Courier New", Courier, mono; font-size: 45px; font-weight: lighter; color: #CC9900; text-decoration: none}
+.freebaners { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: lighter; color: #666666; text-decoration: none; border-color: #009999 #009999 #00CCCC #00FFFF }
+-->
+</style></head>
+<body bgcolor="#FFFFFF">
+<script language="JavaScript1.2" src="coolmenus.js">
+/*******************************************************************************
+Copyright (c) 1999 Thomas Brattli (www.bratta.com)
+
+eXperience DHTML coolMenus - Get it at www.bratta.com
+Version 2.0
+This script can be used freely as long as all copyright messages are
+intact. Visit www.bratta.com/dhtml for the latest version of the script.
+
+These are the varibles you have to set to customize the menu.
+*******************************************************************************/
+</script>
+<script>
+
+
+/********************************************************************************
+Variables to set.
+
+Remember that to set fontsize and fonttype you set that in the stylesheet
+above!
+********************************************************************************/
+
+//Making a menu object
+oMenu=new menuObj('oMenu') //Place a name for the menu in there. Must be uniqe for each menu
+
+//Setting menu object variables
+
+//Style variables NOTE: The stylesheet have been removed. Use this instead! (some styles are there by default, like position:absolute ++)
+oMenu.clMain='padding:3px; font-family:verdana; font-size:12px' //The style for the main menus
+oMenu.clSub='padding:3px; font-family:verdana; font-size:12px' //The style for the submenus
+oMenu.clSubSub='padding:3px; font-family:verdana; font-size:12px' //The style for the subsubmenus
+oMenu.clAMain='text-decoration:none; color:Black' //The style for the main links
+oMenu.clASub='text-decoration:none; color:Black' //The style for the sub links
+oMenu.clASubSub='text-decoration:none; color:Black' //The style for the subsub links
+
+//Background bar properties
+oMenu.backgroundbar=1 //Set to 0 if no backgroundbar
+oMenu.backgroundbarfromleft=0 //The left placement of the backgroundbar in pixel or %
+oMenu.backgroundbarfromtop=0 //The top placement of the backgroundbar  in pixel or %
+oMenu.backgroundbarsize="100%" //The size of the bar in pixel or %
+oMenu.backgroundbarcolor="#ffcc99" //The backgroundcolor of the bar
+
+oMenu.mainheight=20 //The height of the main menuitems in pixel or %
+oMenu.mainwidth=200 //The width of the main menuitems  in pixel or %
+
+/*These are new variables. In this example they are set like the previous version*/
+oMenu.subwidth=oMenu.mainwidth // ** NEW ** The width of the submenus
+oMenu.subheight=20 //The height if the subitems in pixel or % 
+
+oMenu.subsubwidth=oMenu.mainwidth // ** NEW ** The width of the subsubmenus in pixel or % 
+oMenu.subsubheight=oMenu.subheight //** NEW ** The height if the subsubitems in pixel or % 
+
+
+//Writing out the style for the menu (leave this line!)
+oMenu.makeStyle()
+
+oMenu.subplacement=oMenu.mainheight //** NEW ** Relative to the main item
+oMenu.subsubXplacement=oMenu.subwidth/2 //** NEW ** The X placement of the subsubmenus, relative to the sub item
+oMenu.subsubYplacement=15 //** NEW ** The Y placement of the subsubmenus, relative to the sub item
+
+oMenu.mainbgcoloroff='#ffcc99' //The backgroundcolor of the main menuitems
+oMenu.mainbgcoloron='#999999' //The backgroundcolor on mouseover of the main menuitems
+oMenu.subbgcoloroff='#cccc99' //The backgroundcolor of the sub menuitems
+oMenu.subbgcoloron='#999999' //The backgroundcolor on mouseover of the sub menuitems
+oMenu.subsubbgcoloroff='#ffcc99' //The backgroundcolor of the subsub menuitems
+oMenu.subsubbgcoloron='#999999' //The backgroundcolor on mouseover of the subsub menuitems
+oMenu.stayoncolor=1 //Do you want the menus to stay on the mouseovered color when clicked?
+
+oMenu.menuspeed=30 //The speed of the clipping in px
+oMenu.menusubspeed=30 //The speed of the submenus clipping in px
+
+oMenu.menurows=1 //Set to 0 if you want rows and to 1 if you want columns
+
+oMenu.menueventon="click" //Set this to "mouse" if you want the menus to appear onmouseover, set it to "click" if you want it to appear onclick
+oMenu.menueventoff="click" //Set this to "mouse" if you them to disappear onmouseout, if not set it to "click"
+
+//Placement of the menuitems
+
+//Example in %:
+//oMenu.menuplacement=new Array("20%","40%","60%","50%","65%") //Remember to make the arrays contain as many values as you have main menuitems
+
+//Example in px: (remember to use the ' ' around the numbers)
+//oMenu.menuplacement=new Array(10,200,300,400,500)
+
+//Example right beside eachother (only adding the pxbetween variable)
+oMenu.menuplacement=0
+
+//If you use the "right beside eachother" you cant how many pixel there should be between each here
+oMenu.pxbetween=0 //in pixel or %
+
+//And you can set where it should start from the left here
+oMenu.fromleft=25 //in pixel or %
+
+//This is how much from the top the menu should be.
+oMenu.fromtop=0 //in pixel or %
+
+
+/********************************************************************************
+Construct your menus below
+********************************************************************************/
+
+//MAIN 0
+
+//Main items:
+// makeMain(MAIN_NUM,'TEXT','LINK','FRAME_TARGET') (set link to 0 if you want submenus of this menu item)
+oMenu.makeMain(0,'MENU @ savic.com',0)
+	//Sub items:
+	// makeSub(MAIN_NUM,SUB_NUM,'TEXT','LINK',TOTAL,'FRAME_TARGET') (set link to 0 if you want submenus of this menu item)
+	oMenu.makeSub(0,0,'Web design, Diseño de web',0,8)
+	oMenu.makeSub(0,1,'Canary islands pages',0,8)
+	oMenu.makeSub(0,2,'Sailing the world',0,8)
+	oMenu.makeSub(0,3,'Tantra (who knows, knows)',0,8)
+	oMenu.makeSub(0,4,'Music pages',0,8)
+	oMenu.makeSub(0,5,'Food & drinks',0,8)
+	oMenu.makeSub(0,6,'Historu of Savic family',0,8)
+	oMenu.makeSub(0,7,'About me (few boring pages)',0,8)
+
+		//SubSub items:
+		// makeSubSub(MAIN_NUM,SUB_NUM,SUBSUB_NUM,'TEXT','LINK',TOTAL,'FRAME_TARGET')
+		oMenu.makeSubSub(0,0,0,'Home (English / Español)','webdesign/index.htm',7)
+		oMenu.makeSubSub(0,0,1,'Why Internet','webdesign/english/whyinternet.htm',7)
+		oMenu.makeSubSub(0,0,2,'Future of Internet','webdesign/english/future.htm',7)
+		oMenu.makeSubSub(0,0,3,'Portfolio','webdesign/english/portfolio.htm',7)
+		oMenu.makeSubSub(0,0,4,'Services that I do offer','webdesign/english/services.htm',7)
+		oMenu.makeSubSub(0,0,5,'Examples of pages I did','webdesign/english/examples.htm',7)
+		oMenu.makeSubSub(0,0,6,'Contact informations','webdesign/english/contact.htm',7)
+
+		oMenu.makeSubSub(0,1,0,'Gran Canaria IP V5.0 (TEST)','canarias/home/index.htm',5)
+		oMenu.makeSubSub(0,1,1,'Clínica Dental Blancodent','http://www.blancodent.com',5,'target=blank')
+		oMenu.makeSubSub(0,1,2,'Bung. for rent in Maspalomas','canarias/vegasgolf/index.htm',5)
+		oMenu.makeSubSub(0,1,3,'Nesho Spray Art, Street perf.','#',5)
+		oMenu.makeSubSub(0,1,4,'Old GCIP site V4.0','http://www.savic.com/canarias',5)
+
+		
+		oMenu.makeSubSub(0,2,0,'Sailing the world, Why?','#',3)
+		oMenu.makeSubSub(0,2,1,'About yacht, B.R.- Spray 40','#',3)
+		oMenu.makeSubSub(0,2,2,'Planed route, maps','#',3)
+		
+		oMenu.makeSubSub(0,3,0,'Short Intro','#',3)
+		oMenu.makeSubSub(0,3,1,'Description of Tantra','#',3)
+		oMenu.makeSubSub(0,3,2,'Books, links, etc...','#',3)
+		
+
+	
+/********************************************************************************
+End menu construction
+********************************************************************************/
+		
+		
+//When all the menus are written out we initiates the menu
+oMenu.construct()	
+</script>
+<div id="Layer1" style="position:absolute; width:200px; height:115px; z-index:3; left: 79; top: 108"><img src="djidjimidji/imagesall/tantra.gif" width="251" height="350"></div>
+<div id="Layer2" style="position:absolute; left:350px; top:32px; width:400; height:94px; z-index:2"> 
+  <h1 align="right">www.savic.com<br>
+    <span class="freebaners">established 1997</span></h1>
+  <hr width="400" size="1" align="center" noshade>
+  <p> Human brain is very sophisticated biological recording machine. All that 
+    we think we are, is simply, a continues flow of thoughts that are recorded, 
+    in past, from our parents, religions, cultures &amp; experiences. There is 
+    nothing else inside brain, like soul, only that mostly disturbing and useless 
+    flow of thoughts. Note that in the background of thoughts there is a witnessing 
+    itself. If you can stop your brain for a moment, you can feel it. Witnessing 
+    that is unchangeable by outside world, timeless and probably immortal. That 
+    is YOU !<br>
+    <br>
+    This is private site and there is not so much to been seen here. I do have 
+    a loot of pages, but almost all of them are private, and you can't see them 
+    without my permission. <a href="mailto:todo@savic.com" class="freebaners">Ask 
+    here</a>.<br>
+    <br>
+    SASA SAVIC<br>
+    (If you are looking for Gran Canaria Info Page <a href="http://www.savic.com/canarias" class="freebaners">CLICK 
+    HERE</a>)<br>
+  </p>
+  <table width="400" border="0" cellspacing="5" cellpadding="3">
+    <tr bgcolor="#CCCCFF" align="center"> 
+      <td width="33%" class="freebaners"> cocaine free</td>
+      <td width="33%" class="freebaners"> porno free</td>
+      <td width="33%" class="freebaners"> java aplet free</td>
+    </tr>
+  </table>
+  <br>
+  <center>
+    <div align="right"><font face="Verdana, Arial, Helvetica, sans-serif" size="-3" color="#666666"> 
+      Production: &quot;My pocket&quot;, &copy; &quot;moKE signDE&quot; (SOUR)<br>
+      Design: Alejandro del Bosnia (i ja tebi isto)<br>
+      Rajvosa &acute;ba - Ma&acute;paloma 'e 1992 | 1997-2001<br>
+      </font> </div>
+  </center>
+</div>
+
+
+</body>
+</html>

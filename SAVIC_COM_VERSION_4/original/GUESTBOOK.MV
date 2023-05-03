@@ -1,0 +1,1995 @@
+<MIVA standardoutputlevel=""></MIVA>
+<MvASSIGN NAME="OFF" VALUE = "{'<MIVA standardoutputlevel=\"\">'}"></MvASSIGN>
+<MvASSIGN NAME="ON"  VALUE = "{'<MIVA standardoutputlevel=\"text,html\">'}"></MvASSIGN>
+
+<MvCOMMENT> Script Info #########################################################
+###
+### Guestbook - This guestbook was written in Miva for the use of 
+### SimpleNet customers. It is freeware, but any modifications to this
+### code have no guarantees. If you wish to get help with any Miva
+### applications, then visit their site at http://www.miva.com.
+### 
+### Release 2.0 December 1998 
+### Tim Traver & Michael Sussna
+###
+### INSTRUCTIONS #############################################################
+###
+### You are welcome to modify certain portions of this Miva active document
+### which contain material that will appear on your guestbook pages, for
+### example the page heading or the entry form.  There are areas of the
+### admin configuration settings form for modifying general header and footer
+### information, for example, so you don't need to change some things
+### within this document.
+### 
+### Areas where you are allowed to modify content are marked clearly.  They
+### begin with "********* YOU MAY MODIFY THE FOLLOWING **********" and end
+### with "********* YOU MAY MODIFY THE PRECEDING **********."
+###
+### ##########################################################################
+</MvCOMMENT>
+
+<MvASSIGN NAME = "dirprefix"	VALUE = "{'guestbook'}"></MvASSIGN>
+<MvASSIGN NAME = "database"	VALUE = "{'&[dirprefix];/guestbook.dbf'}"></MvASSIGN>	<MvCOMMENT> path name </MvCOMMENT>
+<MvASSIGN NAME = "dbname"	VALUE = "{'guestbook'}"></MvASSIGN>			<MvCOMMENT> short name </MvCOMMENT>
+
+<MvASSIGN NAME = "passwd_file"     VALUE = "{'passwd.txt'}"></MvASSIGN>
+<MvASSIGN NAME = "config_file"     VALUE = "{'config.txt'}"></MvASSIGN>
+
+<MvASSIGN NAME = "textwidth" 	VALUE = "{'50'}"></MvASSIGN>
+<MvASSIGN NAME = "datestamp" VALUE="{ &[tm_year]&[tm_mon]&[tm_mday]&[tm_hour]&[tm_min]&[tm_sec] }"></MvASSIGN>
+<MvASSIGN NAME = "admin_banner_ad" 	VALUE = "{
+	'<br><center>' $ '&[crlf];'
+	$ '<A HREF=\"http://adserver.track-star.com/adman.ts/redirect?track=00129.00003.001">' $ '&[crlf];'
+	$ '<IMG WIDTH=468 HEIGHT=60 BORDER=0 ' $ '&[crlf];'
+	$ 'SRC=\"http://adserver.track-star.com/adman.ts/display?track=00129.00003.001\&time=&[datestamp]\" BORDER=0></A>' $ '&[crlf];'
+	$ '</center>' $ '&[crlf];'
+}"></MvASSIGN>
+
+<MvASSIGN NAME = "banner_ad" 	VALUE = "{
+	'<br><center>' $ '&[crlf];'
+	$ '<A HREF=\"http://adserver.track-star.com/adman.ts/redirect?track=00129.00001.002">' $ '&[crlf];'
+	$ '<IMG WIDTH=468 HEIGHT=60 BORDER=0 ' $ '&[crlf];'
+	$ 'SRC=\"http://adserver.track-star.com/adman.ts/display?track=00129.00001.002\&time=&[datestamp]\" BORDER=0></A>' $ '&[crlf];'
+	$ '</center>' $ '&[crlf];'
+}"></MvASSIGN>
+
+<MvASSIGN NAME = "newline"	VALUE = "{asciichar(10)}"></MvASSIGN>
+<MvASSIGN NAME = "carriage"	VALUE = "{asciichar(13)}"></MvASSIGN>
+<MvASSIGN NAME = "crlf"		VALUE = "{carriage $ newline}"></MvASSIGN>
+<MvASSIGN NAME = "amp"		VALUE = "{asciichar(38)}"></MvASSIGN>
+<MvASSIGN NAME = "quote"	VALUE = "{asciichar(39)}"></MvASSIGN>
+<MvASSIGN NAME = "longquote"	VALUE = "{'&#039;'}"></MvASSIGN>
+<MvASSIGN NAME = "period"	VALUE = "{asciichar(46)}"></MvASSIGN>
+<MvASSIGN NAME = "slash"	VALUE = "{asciichar(47)}"></MvASSIGN>
+<MvASSIGN NAME = "less"		VALUE = "{asciichar(60)}"></MvASSIGN>
+<MvASSIGN NAME = "greater"	VALUE = "{asciichar(62)}"></MvASSIGN>
+<MvASSIGN NAME = "qmark"	VALUE = "{asciichar(63)}"></MvASSIGN>
+<MvASSIGN NAME = "atsign"	VALUE = "{asciichar(64)}"></MvASSIGN>
+<MvASSIGN NAME = "backslash"	VALUE = "{asciichar(92)}"></MvASSIGN>
+<MvASSIGN NAME = "newlines"	VALUE = "{crlf $ crlf}"></MvASSIGN>
+<MvASSIGN NAME = "longless"	VALUE = "{'&lt;'}"></MvASSIGN>
+<MvASSIGN NAME = "longgreater"	VALUE = "{'&gt;'}"></MvASSIGN>
+<MvASSIGN NAME = "dquote"	VALUE = "{'\"'}"></MvASSIGN>
+<MvASSIGN NAME = "longdquote"	VALUE = "{'&quot;'}"></MvASSIGN>
+<MvASSIGN NAME = "bullet"	VALUE = "{asciichar(149)}"></MvASSIGN>
+<MvASSIGN NAME = "nbsp"		VALUE = "{asciichar(174)}"></MvASSIGN>
+<MvASSIGN NAME = "longnbsp"	VALUE = "{'&nbsp;'}"></MvASSIGN>
+<MvASSIGN NAME = "indent"	VALUE = "{'&nbsp;&nbsp;&nbsp;&nbsp;'}"></MvASSIGN>
+<MvASSIGN NAME = "delim"	VALUE = "{'!!##!!'}"></MvASSIGN>
+<MvASSIGN NAME = "yuml"		VALUE = "{asciichar(255)}"></MvASSIGN>
+	
+<MvCOMMENT> SUBROUTINES ##############################################
+### Do NOT change unless you know what you are doing, or feel
+### adventurous...
+### ##################################################################
+</MvCOMMENT>
+
+<MvCOMMENT> MAIN PROCESSING </MvCOMMENT>
+
+	<MvEVAL EXPR = Initialization()></MvEVAL>
+
+	<MvIF EXPR = "{parm_func EQ '' OR parm_func EQ 'showpostform'}">
+		<MvEVAL EXPR = SignGuestbook()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{parm_func EQ 'submit'}">
+		<MvEVAL EXPR = SubmitGuestbook()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{parm_func EQ 'view'}">
+		<MvEVAL EXPR = ViewGuestbook()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{parm_func EQ 'admin'}">
+		<MvEVAL EXPR = Admin()></MvEVAL>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+
+	<MvEXIT></MvEXIT>
+
+<MvCOMMENT> END OF MAIN PROCESSING </MvCOMMENT>
+
+
+<MvFUNCTION NAME = "Initialization">
+	<MvIF EXPR = "{ nargs GT 1 AND arg2 EQ 'admin' }">
+		<MvASSIGN NAME = "parm_func" VALUE="{ 'admin' }"></MvASSIGN>
+	<MvELSE>
+		<MvEVAL EXPR = GetFormInput()></MvEVAL>
+	</MvIF>
+
+	<MvIF EXPR = "{NOT fexists(dirprefix)}">
+		<MvASSIGN NAME = "x" VALUE = "{fmkdir(dirprefix)}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{NOT fexists(database)}">
+		<MvEVAL EXPR = CreateDatabase()></MvEVAL>
+	</MvIF>
+
+	<MvASSIGN NAME = "passwdfile" VALUE = "{dirprefix $ '/' $ passwd_file}"></MvASSIGN>
+	<MvIF EXPR = "{NOT fexists(passwdfile)}">
+		<MvIF EXPR = "{action EQ 'provide_identity'}">	<MvCOMMENT> Done til input errors fixed </MvCOMMENT>
+			<MvEVAL EXPR = ProvideIdentity("ShowProvideIdentity")></MvEVAL>
+		<MvELSE></MvELSE>
+			<MvIF EXPR = "{parm_func EQ ''}">	<MvCOMMENT>## 1st time in </MvCOMMENT>
+				<MvEVAL EXPR = ShowWelcome()></MvEVAL>
+			<MvELSE></MvELSE>
+				<MvEVAL EXPR = ShowProvideIdentity()></MvEVAL>
+			</MvIF>
+			<MvEXIT></MvEXIT>
+		</MvIF>
+	</MvIF>
+
+	<MvASSIGN NAME = "configfile" VALUE = "{dirprefix $ '/' $ config_file}"></MvASSIGN>
+	<MvIF EXPR = "{NOT fexists(configfile)}">
+		<MvEVAL EXPR = SetupLinks()></MvEVAL>	<MvCOMMENT> Don't have title yet, but don't care </MvCOMMENT>
+		<MvEVAL EXPR = AssignDefaultSettings()></MvEVAL>
+		<MvEVAL EXPR = ExportSettings()></MvEVAL>
+		<MvIF EXPR = "{p_user NE ''}">	<MvCOMMENT> If we just came from ShowProvideIdentity </MvCOMMENT>
+			<MvEVAL EXPR = ChooseAdminFunction(p_user,p_pass1)></MvEVAL>
+		<MvELSE></MvELSE>
+			<MvEVAL EXPR = ChooseAdminFunction(parm_user,parm_pass)></MvEVAL>
+		</MvIF>
+		<MvEXIT></MvEXIT>
+	</MvIF>
+
+	<MvEVAL EXPR = GetSettings()></MvEVAL>
+
+	<MvEVAL EXPR = SetupLinks()></MvEVAL>
+
+
+</MvFUNCTION>
+ 
+
+<MvFUNCTION NAME = "GetFormInput">
+
+	<MvASSIGN NAME = "lenny" VALUE = "{len(QUERY_STRING)}"></MvASSIGN>
+	<MvASSIGN NAME = "curr_pos" VALUE = "{1}"></MvASSIGN>
+	<MvWHILE EXPR = "{curr_pos LE lenny}">
+		<MvASSIGN NAME = "a1" VALUE = "{'=' CIN substring(QUERY_STRING,curr_pos,lenny-curr_pos+1)}"></MvASSIGN>
+		<MvIF EXPR = "{a1 GT 0}">
+			<MvASSIGN NAME = "a2" VALUE = "{'+' CIN substring(QUERY_STRING,curr_pos+a1,lenny-curr_pos-a1+1)}"></MvASSIGN>
+			<MvIF EXPR = "{a2 EQ 0}">
+				<MvASSIGN NAME = "a2" VALUE = "{lenny-curr_pos-a1+2}"></MvASSIGN>
+			</MvIF>
+			<MvASSIGN NAME = "x" VALUE = "{substring(QUERY_STRING,curr_pos,a1-1)}"></MvASSIGN>
+			<MvASSIGN NAME = "&[x]"
+				VALUE = "{substring(QUERY_STRING,curr_pos+a1,a2-1)}"></MvASSIGN>
+		</MvIF>
+		<MvASSIGN NAME = "curr_pos" VALUE = "{curr_pos + a1 + a2}"></MvASSIGN>
+	</MvWHILE>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "CreateDatabase">
+
+	<MvCOMMENT>
+		IMPORTANT NOTE: If db fields have same name as form input fields (e.g. "email"),
+		the input fields get clobbered (thus call db field something like "dbemail,"
+		or use the d.fieldname convention).
+	</MvCOMMENT>
+
+	<MvCREATE NAME = "&[dbname];" DATABASE = "&[database];"
+               	FIELDS = 
+                "	dbdate      CHAR(10),
+			dbtime      CHAR(8),
+			dbname1     CHAR(40),
+                       	dbemail     CHAR(40),
+			dbwebsite   CHAR(40),
+			dbcity      CHAR(40),
+			dbstate     CHAR(40),
+			dbcountry   CHAR(40),
+       	                dbcomment1  CHAR(250),
+			dbcomment2  CHAR(250),
+			dbcomment3  CHAR(250)
+		"
+	></MvCREATE>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "SignGuestbook">
+	
+	<MvCOMMENT> GUESTBOOK ENTRY ######################################################
+	### The HTML in this section is for when the user wishes to make an
+	### entry into your guestbook...
+	### ################################################################## </MvCOMMENT>
+
+
+	&[ON];<HTML>&[crlf];&[OFF];
+	&[ON];<HEAD>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+		&[ON];<TITLE>Guestbook</TITLE>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	&[ON];</HEAD>&[crlf];&[OFF];
+	&[ON];&[header];&[crlf];&[OFF];
+
+	<MvIF EXPR = "{errorstring NE ''}">
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+		&[ON];<center><br><font size = +1 color=red>&[crlf];&[OFF];
+		&[ON];<B>We would like more information in your guestbook entry!!</B>&[crlf];&[OFF];
+		&[ON];</font>&[crlf];&[OFF];
+		&[ON];<font color=black>&[crlf];&[OFF];
+		&[ON];<UL>&[crlf];&[OFF];
+		<MvEVAL EXPR = errorstring></MvEVAL>
+		&[ON];</UL>&[crlf];&[OFF];
+		&[ON];</font></center>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	</MvIF>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+	&[ON];<center><h1>Sign Our Guestbook</h1>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	<MvEVAL EXPR = LinkLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+
+	<MvIF EXPR = "{parm_admin_flag EQ 'y'}">
+		&[ON];<form method="post" action="&[documenturl];parm_func=submit+parm_admin_flag=y+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[crlf];&[OFF];
+	<MvELSE></MvELSE>
+		&[ON];<form method="post" action="&[documenturl];parm_func=submit">&[crlf];&[OFF];
+	</MvIF>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+	&[ON];<table border=0 cellpadding=3 cellspacing=3>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your Name&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="name" value="&[name];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];</tr>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your E-Mail Address&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="email" value="&[email];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];</tr>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your Web Site&[crlf];&[OFF];
+	&[ON];</th><td>http://</td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="website" value="&[website];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your City&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="city" value="&[city];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your State or Province&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="state" value="&[state];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your Country&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<input type="text" name="country" value="&[country];" size=40></INPUT>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];</tr>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>&[crlf];&[OFF];
+	&[ON];Your Comments&[crlf];&[OFF];
+	&[ON];</th><td></td>&[crlf];&[OFF];
+	&[ON];<td align=left>&[crlf];&[OFF];
+	&[ON];<textarea name="comments"rows=15 cols=50 wrap=virtual>&[comments];</textarea>&[crlf];&[OFF];
+	&[ON];</td>&[crlf];&[OFF];
+	&[ON];</tr>&[crlf];&[OFF];
+	&[ON];</table><br><br>&[crlf];&[OFF];
+	&[ON];<input type="submit" value="   Submit My Comments  "></INPUT>&[crlf];&[OFF];
+	&[ON];<input type="reset" value="   Clear My Comments   "></INPUT>&[crlf];&[OFF];
+	&[ON];</form>&[crlf];&[OFF];
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	<MvEVAL EXPR = LinkLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+	&[ON];&[banner_ad];&[footer];&[crlf];&[OFF];
+
+	<MvEXIT></MvEXIT>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "SubmitGuestbook">
+
+	<MvCOMMENT> MAIN OUTPUT #########################################################
+	### This is where you should customize your script for your html style.
+	### You can change anything after the <HTML> tag except the macro 
+	### commands ( &[macro]; ) and the beginning and final </IF> statements
+	### ################################################################## </MvCOMMENT>
+
+	<MvCOMMENT> GUESTBOOK SUBMISSION ################################################
+	### The HTML in this section is what you see after the user has made an
+	### entry into your guestbook...
+	### Only change the html between the <HTML> and </HTML> tags...
+	### It does some error checking, and then will send it back to
+	### the same screen if it finds errors.
+	### ################################################################## </MvCOMMENT>
+	
+	<MvEVAL EXPR = Date_and_Time()></MvEVAL>
+
+	<MvEVAL EXPR = ConvertFields()></MvEVAL>
+
+	<MvEVAL EXPR = CheckRequiredFields()></MvEVAL>
+
+	<MvIF EXPR = "{check EQ '1'}">	<MvCOMMENT> If a required field is missing </MvCOMMENT>
+		<MvEVAL EXPR = SignGuestbook()></MvEVAL>
+	<MvELSE></MvELSE>
+		<MvCOMMENT> Record the data, and print out the response. 
+		 Write the entry to the database file. </MvCOMMENT>
+
+		<MvOPEN NAME = "&[dbname];" DATABASE = "&[database];" INDEXES = ""></MvOPEN>
+		<MvASSIGN NAME = "&[dbname];.d.dbdate"     VALUE = "{date}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbtime"     VALUE = "{time}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbname1"    VALUE = "{name}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbemail"    VALUE = "{email}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbwebsite"  VALUE = "{website}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbcity"     VALUE = "{city}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbstate"    VALUE = "{state}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbcountry"  VALUE = "{country}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbcomment1" VALUE = "{substring(comments,1,250)}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbcomment2" VALUE = "{substring(comments,251,250)}"></MvASSIGN>
+		<MvASSIGN NAME = "&[dbname];.d.dbcomment3" VALUE = "{substring(comments,501,250)}"></MvASSIGN>
+		<MvADD NAME = "&[dbname];"></MvADD>
+		<MvCLOSE NAME = "&[dbname];"></MvCLOSE>
+
+		&[ON];<HTML>&[crlf];&[OFF];
+		&[ON];<HEAD>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+			&[ON];<TITLE>Guestbook</TITLE>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+		&[ON];</HEAD>&[crlf];&[OFF];
+		&[ON];&[header];&[crlf];&[OFF];
+
+		<MvEVAL EXPR = LinkLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+		&[ON];<center>&[crlf];&[OFF];
+		&[ON];<br><font size=+1><B>Thank you for signing our guestbook!<br>&[crlf];&[OFF];
+		&[ON];<br>Come back and visit us again soon.<br><br></B></font>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+		<MvEVAL EXPR = Footer()></MvEVAL>
+
+		<MvIF EXPR = "{mailtome EQ 'on'}">
+			<MvEVAL EXPR = MailToMe()></MvEVAL>
+		</MvIF>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ViewGuestbook">
+
+	<MvOPEN NAME = "&[dbname];" DATABASE = "&[database];" INDEXES = ""></MvOPEN>
+	<MvASSIGN NAME = "totalentries" VALUE = "{totrec}"></MvASSIGN>
+	<MvEVAL EXPR = SetupFromAndTo()></MvEVAL>
+	<MvEVAL EXPR = BuildEntries()></MvEVAL>
+	<MvCLOSE NAME = "&[dbname];"></MvCLOSE>
+
+	<MvCOMMENT> GUESTBOOK VIEWING ###################################################
+	### The HTML in this section is for when the user wishes to view
+	### entries in your guestbook...
+	### Only change the html between the <HTML> and </HTML> tags..., but you
+	### need to leave the entries macro to show the entries...
+	### ################################################################## </MvCOMMENT>
+
+	&[ON];<HTML>&[crlf];&[OFF];
+	&[ON];<HEAD>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+		&[ON];<TITLE>Guestbook</TITLE>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	&[ON];</HEAD>&[crlf];&[OFF];
+	&[ON];&[header];&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+	&[ON];<center><h1>Welcome to Our Guestbook</h1>&[crlf];&[OFF];
+	&[ON];</CENTER>&[crlf];&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+	&[ON];&[entries_heading];&[crlf];&[OFF];
+	<MvEVAL EXPR = LinkLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+
+	&[ON];&[entries];&[crlf];&[OFF];
+
+	&[ON];<CENTER>&[crlf];&[OFF];
+
+	<MvEVAL EXPR = BuildButtons()></MvEVAL>
+
+	<MvEVAL EXPR = LinkLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+	&[ON];&[banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "SetupLinks">
+
+	<MvASSIGN NAME = "link_main_short"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=view">&[title];</a> ]'}"></MvASSIGN>
+	<MvASSIGN NAME = "link_main_short_dflt"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=view">View Guestbook</a> ]'}"></MvASSIGN>
+	<MvASSIGN NAME = "link_post_short"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=showpostform">Post Entry</a> ]'}"></MvASSIGN>
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "LinkLine" PARAMETERS = "admin,uname,pass">
+
+	<MvASSIGN NAME = "data_area" VALUE = "{linkline}"></MvASSIGN>
+
+	<MvASSIGN NAME = "link_main_long"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=view+parm_admin_flag=&[admin];+parm_user=&[uname];+parm_pass=&[pass];">&[title];</a> ]'}"></MvASSIGN>
+	<MvASSIGN NAME = "link_post_long"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=showpostform+parm_admin_flag=&[admin];+parm_user=&[uname];+parm_pass=&[pass];">Post Message</a> ]'}"></MvASSIGN>
+	<MvASSIGN NAME = "link_admin"
+		 VALUE = "{'[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[uname];+parm_pass=&[pass];">&[title2];</a> ]'}"></MvASSIGN>
+
+	<MvASSIGN NAME = "extra_parms" VALUE = "{'+parm_admin_flag=&[admin];+parm_user=&[uname];+parm_pass=&[pass];'}"></MvASSIGN>
+
+	<MvASSIGN NAME = "curr_pos" VALUE = "{'1'}"></MvASSIGN>
+
+	<MvCOMMENT> Omit faq link if not to be shown </MvCOMMENT>
+	<MvASSIGN NAME = "a1" VALUE = "{link_faq_short CIN data_area}"></MvASSIGN>
+	<MvIF EXPR = "{(a1 GT '0') AND (show_faq NE 'on')}">
+		<MvASSIGN NAME = "data_area" VALUE = "{substring(data_area,1,a1-1)
+		$ substring(data_area,a1+len(link_faq_short),len(data_area)-(a1+len(link_faq_short)-1))}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "a1" VALUE = "{'parm_func=view' CIN substring(data_area,curr_pos,len(data_area)-curr_pos+1)}"></MvASSIGN>
+
+	<MvASSIGN NAME = "general_data_area" VALUE = "{''}"></MvASSIGN>
+
+	<MvIF EXPR = "{a1 GT '0'}">
+		<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ substring(data_area,curr_pos,a1+13)}"></MvASSIGN>
+		<MvASSIGN NAME = "curr_pos" VALUE = "{curr_pos + a1+13}"></MvASSIGN>
+
+		<MvIF EXPR = "{admin EQ 'y'}">
+			<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ extra_parms}"></MvASSIGN>
+		</MvIF>
+	</MvIF>
+
+	<MvASSIGN NAME = "a2" VALUE = "{'parm_func=showpostform' CIN substring(data_area,curr_pos,len(data_area)-curr_pos+1)}"></MvASSIGN>
+	
+	<MvIF EXPR = "{a2 GT '0'}">
+		<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ substring(data_area,curr_pos,a2+21)}"></MvASSIGN>
+		<MvASSIGN NAME = "curr_pos" VALUE = "{curr_pos + a2+21}"></MvASSIGN>
+
+		<MvIF EXPR = "{admin EQ 'y'}">
+			<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ extra_parms}"></MvASSIGN>
+		</MvIF>
+	</MvIF>
+
+	<MvASSIGN NAME = "a4" VALUE = "{']' CIN substring(data_area,curr_pos,len(data_area)-curr_pos+1)}"></MvASSIGN>
+	<MvIF EXPR = "{a4 GT '0'}">
+		<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ substring(data_area,curr_pos,a4)}"></MvASSIGN>
+		<MvASSIGN NAME = "curr_pos" VALUE = "{curr_pos + a4}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{admin EQ 'y'}">
+		<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ ' ' $ link_admin}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{curr_pos LE len(data_area)}">
+		<MvASSIGN NAME = "general_data_area" VALUE = "{general_data_area $ substring(data_area,curr_pos,len(data_area)-curr_pos+1)}"></MvASSIGN>
+	</MvIF>
+	&[ON];&[general_data_area];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "SetupFromAndTo">
+
+	<MvCOMMENT> From and to are already filled in if we're coming back in from viewing </MvCOMMENT>
+
+	<MvIF EXPR = "{mostrecent NE ''}">
+		<MvASSIGN NAME = "viewfrom" VALUE = "{mviewfrom}"></MvASSIGN>
+		<MvASSIGN NAME = "viewto"   VALUE = "{mviewto}"></MvASSIGN>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{backintime NE ''}">
+		<MvASSIGN NAME = "viewfrom" VALUE = "{bviewfrom}"></MvASSIGN>
+		<MvASSIGN NAME = "viewto"   VALUE = "{bviewto}"></MvASSIGN>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{forwardintime NE ''}">
+		<MvASSIGN NAME = "viewfrom" VALUE = "{fviewfrom}"></MvASSIGN>
+		<MvASSIGN NAME = "viewto"   VALUE = "{fviewto}"></MvASSIGN>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{viewfrom eq '0'}">
+		<MvASSIGN NAME = "viewfrom" VALUE = "{totalentries - numberofentries + 1}"></MvASSIGN>
+		<MvASSIGN NAME = "viewto"   VALUE = "{totalentries}"></MvASSIGN>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+
+	<MvIF EXPR = "{viewfrom LE '0'}">
+		<MvASSIGN NAME = "viewfrom" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{viewto GT totalentries}">
+		<MvASSIGN NAME = "viewto"   VALUE = "{totalentries}"></MvASSIGN>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "BuildEntries">
+
+	<MvIF EXPR = "{totalentries EQ '0'}">
+		<MvASSIGN NAME = "entries"
+			VALUE = "{entries $ '<center><br>There are no guestbook entries at this time.<br><br></center>'}"></MvASSIGN>
+	<MvELSE></MvELSE>        
+		<MvASSIGN NAME = "entries_heading" VALUE = "{'<center>Total Guestbook Entries : ' $ totalentries}"></MvASSIGN>
+		<MvASSIGN NAME = "entries_heading" VALUE = "{entries_heading $ '<br>Now showing '}"></MvASSIGN>
+		<MvIF EXPR = "{viewfrom EQ viewto}">
+			<MvASSIGN NAME = "entries_heading" VALUE = "{entries_heading $ 'Entry <B>' $ viewto}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "entries_heading" VALUE = "{entries_heading $ 'Entries <B>'
+				$ viewto $ '</B> through <B>' $ viewfrom }"></MvASSIGN>
+		</MvIF>
+		<MvASSIGN NAME = "entries_heading" VALUE = "{entries_heading $ '</B></center><br>'}"></MvASSIGN>
+
+		<MvASSIGN NAME = "entries" VALUE = "{''}"></MvASSIGN>
+		<MvASSIGN NAME = "loop" VALUE = "{viewto}"></MvASSIGN>
+		<MvWHILE EXPR = "{loop GE viewfrom}">
+
+			<MvCOMMENT> ########################################################
+			## This loop is making a single variable to hold all of the       ##
+			## entries so we can just use the variable in the final           ##
+			## page output to represent the entire set of entries             ##
+			## It is also putting the entries in reverse order.               ##
+			## Be careful if you change this area.				  ##
+			## #################################################### </MvCOMMENT>
+
+        	        <MvGO NAME = "&[dbname];" ROW = "&[loop];"></MvGO>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+			<MvASSIGN NAME = "entries" VALUE = "{entries $ '&[crlf];'
+			$ '<ul><TABLE border=0 cellspacing=3>' $ '&[crlf];'
+			$ '<TR><TH align=right>Date:</TH><TD>' $ '&[crlf];'
+			$ '&nbsp;' $ &[dbname];.d.dbdate $ ' - ' $ &[dbname];.d.dbtime $ '&[crlf];'
+			$ '</TD></TR><TR><TH align=right>Name:</TH><TD>' $ '&[crlf];'
+			$ '&nbsp;' $ &[dbname];.d.dbname1 $ '&[crlf];'
+			$ '</TD></TR><TR><TH align=right>Email:</TH><TD>&nbsp;<a href=\"mailto:' $ '&[crlf];'
+			$ &[dbname];.d.dbemail $ '&[crlf];'
+			$ '\">' $ &[dbname];.d.dbemail $ '&[crlf];'
+			$ '</a></TD></TR><TR><TH align=right>Site:</TH><TD>&nbsp;<A href=\"http://' $ '&[crlf];'
+			$ &[dbname];.d.dbwebsite $ '&[crlf];'
+			$ '\">http://' $ '&[crlf];'
+			$ &[dbname];.d.dbwebsite $ '&[crlf];'
+			$ '</A></TD></TR>' $ '&[crlf];'
+			$ '<TR><TH align=right>Location:</TH><TD>' $ '&[crlf];'
+			$ '&nbsp;' $ &[dbname];.d.dbcity $ ', ' $ &[dbname];.d.dbstate $ ', ' $ &[dbname];.d.dbcountry $ '&[crlf];'
+			$ '</TD></TR><TR><TH align=right>Comments:</TH><TD>' $ '&[crlf];'
+			$ '&nbsp;' $ &[dbname];.d.dbcomment1 $ &[dbname];.d.dbcomment2 $ &[dbname];.d.dbcomment3 $ '&[crlf];'
+			$ '</TD></TR></TABLE></ul><hr width=90%>'}"></MvASSIGN>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+			<MvASSIGN NAME = "loop" VALUE = "{loop - 1}"></MvASSIGN>
+		</MvWHILE>
+		<MvASSIGN NAME = "entries" VALUE = "{entries $ '</UL>'}"></MvASSIGN>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "BuildButtons">
+
+	<MvIF EXPR = "{parm_admin_flag EQ 'y'}">
+		&[ON];<form method="post" action="&[documenturl];parm_func=view+parm_admin_flag=y+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[crlf];&[OFF];
+	<MvELSE></MvELSE>
+		&[ON];<form method="post" action="&[documenturl];parm_func=view">&[crlf];&[OFF]; 
+	</MvIF>
+	<MvASSIGN NAME = "currviewfrom" VALUE = "{viewfrom}"></MvASSIGN>
+	<MvASSIGN NAME = "currviewto"   VALUE = "{viewto}"></MvASSIGN>
+	<MvIF EXPR = "{currviewfrom GT '1'}">			<MvCOMMENT> Not last page </MvCOMMENT>
+		<MvIF EXPR = "{viewto EQ totalentries}">	<MvCOMMENT> First page </MvCOMMENT>
+			<MvASSIGN NAME = "bviewfrom" VALUE = "{currviewfrom - numberofentries}"></MvASSIGN>
+			<MvASSIGN NAME = "bviewto"   VALUE = "{currviewfrom - 1}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "bviewfrom" VALUE = "{currviewfrom - numberofentries}"></MvASSIGN>
+			<MvASSIGN NAME = "bviewto"   VALUE = "{currviewto   - numberofentries}"></MvASSIGN>
+		</MvIF>
+		<MvHIDE FIELDS = "bviewfrom, bviewto"></MvHIDE>
+		&[ON];<input name="backintime" type="submit" value="Next Page"></INPUT>&[crlf];&[OFF];
+	</MvIF>
+	<MvIF EXPR = "{currviewto LT totalentries}">	<MvCOMMENT> Not first page </MvCOMMENT>
+		<MvIF EXPR = "{viewfrom EQ '1'}">	<MvCOMMENT> Last page </MvCOMMENT>
+			<MvASSIGN NAME = "fviewfrom" VALUE = "{currviewto + 1}"></MvASSIGN>
+			<MvASSIGN NAME = "fviewto"   VALUE = "{currviewto + numberofentries}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "fviewfrom" VALUE = "{currviewfrom + numberofentries}"></MvASSIGN>
+			<MvASSIGN NAME = "fviewto"   VALUE = "{currviewto   + numberofentries}"></MvASSIGN>
+		</MvIF>
+		<MvHIDE FIELDS = "fviewfrom, fviewto"></MvHIDE>
+		&[ON];<input name="forwardintime" type="submit" value="Previous Page"></INPUT>&[crlf];&[OFF];
+	</MvIF>
+	<MvIF EXPR = "{totalentries GT '0'}">
+		<MvIF EXPR = "{viewto NE totalentries}"> <MvCOMMENT> Not first page </MvCOMMENT>
+			<MvASSIGN NAME = "mviewfrom" VALUE = "{totalentries - numberofentries + 1}"></MvASSIGN>
+			<MvASSIGN NAME = "mviewto"   VALUE = "{totalentries}"></MvASSIGN>
+			<MvHIDE FIELDS = "mviewfrom, mviewto"></MvHIDE>
+			&[ON];<input name="mostrecent" type="submit" value="First Page"></INPUT>&[crlf];&[OFF];
+		</MvIF>
+	</MvIF>
+	&[ON];</form>&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "MailToMe">
+
+	<MvCOMMENT> GUESTBOOK MAILING ###################################################
+	### This section is for when you wish to receive the guestbook entry as
+	### a mail message...(Set the mail variables in the configuration settings page.)
+	### ################################################################## </MvCOMMENT>
+
+	<MvASSIGN NAME = "mailto" 		VALUE = "{ReconvertTags(mailto)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailfrom" 		VALUE = "{ReconvertTags(mailfrom)}"></MvASSIGN>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+	&[ON];
+	<MvSMTP TO 		= "{mailto}"
+		SUBJECT 	= "Guestbook Entry"
+		MAILHOST	= "{mailhost}"
+		FROM 		= "{mailfrom}">
+
+		Received an entry from your guestbook.
+
+		Date     : &[date];
+		Time     : &[time];
+
+		Name     : &[name];
+		Email    : &[email];
+
+		Web Site : http://&[website];
+
+		Comments : &[comments];
+
+	</MvSMTP>
+	&[OFF];
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+	<MvEXIT></MvEXIT>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "Date_and_Time">
+
+	<MvCOMMENT> This chunk of htmlscript figures out the date and time of the
+		entry, accounting for the different time zones. You have set 
+		the "time_zone" field in the beginning of this script.</MvCOMMENT>
+
+	<MvIF EXPR = "{tm_isdst}">	
+		<MvCOMMENT> If not daylight savings, subtract one hour </MvCOMMENT>
+		<MvASSIGN NAME = "time_t" VALUE = "{time_t + 3600}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "month"  VALUE = "{time_t_month(time_t,time_zone)}"></MvASSIGN>
+	<MvASSIGN NAME = "day"    VALUE = "{time_t_dayofmonth(time_t,time_zone)}"></MvASSIGN>
+	<MvASSIGN NAME = "year"   VALUE = "{time_t_year(time_t,time_zone)}"></MvASSIGN>
+	<MvASSIGN NAME = "hour"   VALUE = "{time_t_hour(time_t,time_zone)}"></MvASSIGN>
+	<MvASSIGN NAME = "minute" VALUE = "{time_t_min(time_t,time_zone)}"></MvASSIGN>
+	
+	<MvIF EXPR = "{minute LT '10'}">
+		<MvASSIGN NAME = "minute" VALUE = "{'0' $ minute}"></MvASSIGN>
+	</MvIF>
+
+        <MvASSIGN NAME = "ampm" VALUE = "{'AM'}"></MvASSIGN>
+	<MvIF EXPR = "{hour GT '11'}">
+		<MvASSIGN NAME = "ampm" VALUE = "{'PM'}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{hour GT '12'}">
+		<MvCOMMENT> Make this check *after* you do the ampm logic! </MvCOMMENT>
+		<MvASSIGN NAME = "hour" VALUE = "{hour - 12}"></MvASSIGN>
+	</MvIF>
+
+	<MvIF EXPR = "{hour EQ '0'}">
+		<MvCOMMENT> Make this check *after* you do the ampm logic! </MvCOMMENT>
+		<MvASSIGN NAME = "hour" VALUE = "{'12'}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "date" VALUE = "{month $ '/' $ day $ '/' $ year}"></MvASSIGN>
+	<MvASSIGN NAME = "time" VALUE = "{hour $ ':' $ minute $ ' ' $ ampm}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ConvertFields">
+
+	<MvASSIGN NAME = "date"		VALUE = "{ConvertTags(date)}"></MvASSIGN>
+	<MvASSIGN NAME = "time"		VALUE = "{ConvertTags(time)}"></MvASSIGN>
+	<MvASSIGN NAME = "name"		VALUE = "{ConvertTags(name)}"></MvASSIGN>
+	<MvASSIGN NAME = "email"	VALUE = "{ConvertTags(email)}"></MvASSIGN>
+	<MvASSIGN NAME = "website"	VALUE = "{ConvertTags(website)}"></MvASSIGN>
+	<MvASSIGN NAME = "city"		VALUE = "{ConvertTags(city)}"></MvASSIGN>
+	<MvASSIGN NAME = "state"	VALUE = "{ConvertTags(state)}"></MvASSIGN>
+	<MvASSIGN NAME = "country"	VALUE = "{ConvertTags(country)}"></MvASSIGN>
+	<MvASSIGN NAME = "comments"	VALUE = "{ConvertTags(comments)}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "CheckRequiredFields">
+
+	<MvASSIGN NAME = "check" VALUE = "{'0'}"></MvASSIGN>
+	<MvASSIGN NAME = "errorstring" VALUE = "{''}"></MvASSIGN>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE FOLLOWING ********** </MvCOMMENT>
+
+	<MvIF EXPR = "{name EQ ''}">
+		<MvASSIGN NAME = "errorstring" VALUE = "{errorstring $ 'Please tell us your name.<br>'}"></MvASSIGN>
+		<MvASSIGN NAME = "check" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	<MvIF EXPR = "{email EQ ''}">
+		<MvIF EXPR = "{name NE ''}">
+			<MvASSIGN NAME = "errorstring" VALUE = "{errorstring $ 'What is your e-mail address, &[name];?<br>'}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "errorstring" VALUE = "{errorstring $ 'What is your e-mail address?<br>'}"></MvASSIGN>
+		</MvIF>
+		<MvASSIGN NAME = "check" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	<MvIF EXPR = "{comments EQ ''}">
+		<MvIF EXPR = "{name NE ''}">
+			<MvASSIGN NAME = "errorstring" VALUE = "{errorstring $ 'Please leave us your comments, &[name];.<br>'}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "errorstring" VALUE = "{errorstring $ 'Please leave us your comments.<br>'}"></MvASSIGN>
+		</MvIF>
+		<MvASSIGN NAME = "check" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+
+	<MvCOMMENT> ********** YOU MAY MODIFY THE PRECEDING ********** </MvCOMMENT>
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>################################################################################
+#      		      	Admin Functions			  		                  #
+###############################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "Admin">
+
+	<MvIF EXPR = "{(parm_admin_func NE '' OR parm_user NE '') AND action EQ ''}">
+		<MvIF EXPR = "{parm_admin_func EQ 'show_change_identity'}">
+			<MvEVAL EXPR = ShowChangeIdentity()></MvEVAL>
+			<MvEVAL EXPR = Footer()></MvEVAL>
+		<MvELSE></MvELSE>
+		<MvIF EXPR = "{parm_admin_func EQ 'show_change_settings'}">
+			<MvEVAL EXPR = GetSettings()></MvEVAL>
+			<MvEVAL EXPR = ShowChangeSettings()></MvEVAL>
+		<MvELSE></MvELSE>
+		<MvIF EXPR = "{parm_admin_func EQ 'show_remove_entries'}">
+			<MvEVAL EXPR = ShowRemoveEntries()></MvEVAL>
+			<MvEVAL EXPR = Footer()></MvEVAL>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "username" VALUE = "{parm_user}"></MvASSIGN>
+			<MvASSIGN NAME = "password" VALUE = "{parm_pass}"></MvASSIGN>
+			<MvEVAL EXPR = CheckIdentity()></MvEVAL>
+			<MvEVAL EXPR = ChooseAdminFunction(parm_user,parm_pass)></MvEVAL>
+		</MvIF>
+		</MvIF>
+		</MvIF>
+	<MvELSE></MvELSE>
+		<MvIF EXPR = "{action EQ 'remove_entries'}">
+			<MvCOMMENT> Not scrolling </MvCOMMENT>
+			<MvIF EXPR = "{backintime EQ '' AND forwardintime EQ ''}">
+				<MvEVAL EXPR = RemoveEntries()></MvEVAL>
+			<MvELSE></MvELSE>
+				<MvEVAL EXPR = ShowRemoveEntries()></MvEVAL>
+			</MvIF>
+		<MvELSE></MvELSE>
+		<MvCOMMENT> Not scrolling </MvCOMMENT>
+		<MvIF EXPR = "{action EQ 'change_settings'}">
+			<MvEVAL EXPR = ChangeSettings(parm_user,parm_pass)></MvEVAL>
+		<MvELSE></MvELSE>
+		<MvIF EXPR = "{action EQ 'change_identity'}">
+			<MvEVAL EXPR = ChangeIdentity("ShowChangeIdentity")></MvEVAL>
+		<MvELSE></MvELSE>
+		<MvIF EXPR = "{action EQ 'provide_identity'}">
+			<MvEVAL EXPR = ProvideIdentity("ShowProvideIdentity")></MvEVAL>
+		<MvELSE></MvELSE>
+		<MvIF EXPR = "{action EQ 'prove_identity'}">
+			<MvEVAL EXPR = CheckIdentity2("ShowProveIdentity")></MvEVAL>
+			<MvEVAL EXPR = ChooseAdminFunction(username,password)></MvEVAL>
+		<MvELSE></MvELSE>
+			<MvEVAL EXPR = ShowProveIdentity()></MvEVAL>
+			<MvEVAL EXPR = Footer()></MvEVAL>
+		</MvIF>
+		</MvIF>
+		</MvIF>
+		</MvIF>
+		</MvIF>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ChooseAdminFunction" PARAMETERS = "uname,pass">
+
+	&[ON];<html><head>&[header];<title>&[title]; Administration</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor=#FFFFFF text=#000000><center><h1>&[title]; Administration</h1></center>&[crlf];&[OFF];
+	&[ON];<hr width=90%><br>&[crlf];&[OFF];
+	&[ON];<ul><ul>&[crlf];&[OFF];
+	&[ON];<li>Change Configuration Settings&[crlf];&[OFF];
+	&[ON];<ul>&[crlf];&[OFF];
+	&[ON];<li><a href="&[documenturl];parm_func=admin+parm_admin_func=show_change_settings+parm_user=&[uname];+parm_pass=&[pass];">Change Settings</a>&[crlf];&[OFF];
+	&[ON];</ul><br>&[crlf];&[OFF];
+	&[ON];<li>Remove Entries&[crlf];&[OFF];
+	&[ON];<ul>&[crlf];&[OFF];
+	&[ON];<li><a href="&[documenturl];parm_func=admin+parm_admin_func=show_remove_entries+parm_user=&[uname];+parm_pass=&[pass];">Remove Entries</a>&[crlf];&[OFF];
+	&[ON];</ul><br>&[crlf];&[OFF];
+	&[ON];<li>Change User Name or Password&[crlf];&[OFF];
+	&[ON];<ul>&[crlf];&[OFF];
+	&[ON];<li><a href="&[documenturl];parm_func=admin+parm_admin_func=show_change_identity+parm_user=&[uname];+parm_pass=&[pass];">Change Admin Identity</a>&[crlf];&[OFF];
+	&[ON];</ul><br>&[crlf];&[OFF];
+	&[ON];<li>View &[title];&[crlf];&[OFF];
+	&[ON];<ul>&[crlf];&[OFF];
+	&[ON];<li><a href="&[documenturl];parm_func=view+parm_admin_flag=y+parm_user=&[uname];+parm_pass=&[pass];">&[title];</a>&[crlf];&[OFF];
+	&[ON];</ul>&[crlf];&[OFF];
+	&[ON];</ul>&[crlf];&[OFF];
+	&[ON];</ul><hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>###########################################################################################
+
+	SETTINGS FUNCTIONS
+
+###########################################################################################</MvCOMMENT>
+
+
+<MvCOMMENT>##############################################################################
+# Change Installation Settings                                                  # 
+#                                                                               # 
+#    This form is used to change Guestbook variables such as the time zone,     #
+# the number of postings to show at a time, and so on.  The administrator       #
+# must supply a password after the first time.                                  #
+#                                                                               #
+############################################################################# </MvCOMMENT>
+
+<MvFUNCTION NAME = "ShowChangeSettings">
+
+	<MvASSIGN NAME = "linkline" VALUE = "{ConvertTags(linkline)}"></MvASSIGN>
+	<MvASSIGN NAME = "footer" VALUE = "{ConvertTags(footer)}"></MvASSIGN>
+
+	&[ON];<html><head>&[header];<title>&[title2]; - Change Configuration Settings</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor="#ffffff"><center><h1>&[title2]; - Change Settings</h1></center>&[crlf];&[OFF];
+	&[ON];<ul><ul>&[crlf];&[OFF];
+	&[ON];<p>Use this Change Settings form to change configuration variable settings.  If you want to&[crlf];&[OFF];
+	&[ON];see the default settings, click the "Show Defaults" button below.</p>&[crlf];&[OFF];
+	&[ON];This and other Admin functions are available through the main Admin menu.&[crlf];&[OFF];
+	&[ON];Click here to visit the <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2]; Main Menu</a>.&[crlf];&[OFF];
+	&[ON];To view the guestbook, click on <a href="&[documenturl];parm_func=view+parm_admin_flag=y+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title];</a>.&[crlf];&[OFF];
+	&[ON];<p>You are allowed to edit the Miva document (guestbook.mv) to modify&[crlf];&[OFF];
+	&[ON];other information appearing in your guestbook pages.  Use a text editor&[crlf];&[OFF];
+	&[ON];to edit it and read the INSTRUCTIONS at the top of the file.</p>&[crlf];&[OFF];
+	&[ON];</ul></ul>&[crlf];&[OFF];
+	&[ON];<p/>&[crlf];&[OFF];
+	&[ON];<p>&[crlf];&[OFF];
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[crlf];&[OFF];
+	&[ON];<input type=hidden name="action" value="change_settings"></INPUT>&[crlf];&[OFF];
+	&[ON];<ul>&[crlf];&[OFF];
+	    &[ON];<div align="center"><table border width="85%">&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Entries per Page in Guestbook</th>&[crlf];&[OFF];
+		    &[ON];<td>How many entries per page?</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="4" name="form_numberofentries"
+			 value = "&[numberofentries];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Entries per Page in Admin Remove Function</th>&[crlf];&[OFF];
+		    &[ON];<td>How many entries per page?</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="4" name="form_numberofentries_admin"
+			 value = "&[numberofentries_admin];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Mail to Me?</th>&[crlf];&[OFF];
+		    &[ON];<td>Do you wish to receive the guestbook entry as a mail message?</td>&[crlf];&[OFF];
+		    <MvIF EXPR = "{mailtome EQ 'on'}">
+		            &[ON];<td><input type="checkbox" name="form_mailtome" checked></INPUT></td>&[crlf];&[OFF];
+		    <MvELSE></MvELSE>
+		            &[ON];<td><input type="checkbox" name="form_mailtome"></INPUT></td>&[crlf];&[OFF];
+		    </MvIF>
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Mail to</th>&[crlf];&[OFF];
+		    &[ON];<td>E-mail address of recipient (for mail to me)</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="50" name="form_mailto"
+			 value = "&[mailto];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Mail host</th>&[crlf];&[OFF];
+		    &[ON];<td>Host name (for mail to me)</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="50" name="form_mailhost"
+			 value = "&[mailhost];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Mail from</th>&[crlf];&[OFF];
+		    &[ON];<td>E-mail address of sender (for mail to me)</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="50" name="form_mailfrom"
+			 value = "&[mailfrom];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Time Zone</th>&[crlf];&[OFF];
+		    &[ON];<td>Relative to GMT (e.g. Pacific is -8).</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="4" name="form_time_zone"
+			 value = "&[time_zone];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Application Title</th>&[crlf];&[OFF];
+		    &[ON];<td>Used in headings.</td>&[crlf];&[OFF];
+	            &[ON];<td><input type="text" size="50" name="form_title"
+			 value = "&[title];"></INPUT></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Page Header</th>&[crlf];&[OFF];
+		    &[ON];<td>If you want to supply your own header, do it here.</td>&[crlf];&[OFF];
+	            &[ON];<td><textarea name="form_header" wrap="virtual" rows="10"
+			cols=&[textwidth];>&[header];</textarea></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Link Line</th>&[crlf];&[OFF];
+		    &[ON];<td>If you want to supply your own line of links, do it here.</td>&[crlf];&[OFF];
+	            &[ON];<td><textarea name="form_linkline" wrap="virtual" rows="10"
+			cols=&[textwidth];>&[linkline];</textarea></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	        &[ON];<tr>&[crlf];&[OFF];
+	            &[ON];<th>Page Footer</th>&[crlf];&[OFF];
+		    &[ON];<td>If you want to supply your own footer, do it here.</td>&[crlf];&[OFF];
+	            &[ON];<td><textarea name="form_footer" wrap="virtual" rows="10"
+			cols=&[textwidth];>&[footer];</textarea></td>&[crlf];&[OFF];
+	        &[ON];</tr>&[crlf];&[OFF];
+	    &[ON];</table></ul>&[crlf];&[OFF];
+	    &[ON];</div>&[crlf];&[OFF];
+	&[ON];<center><input type="submit" name="SubmitChanges" value="Submit Changes"></INPUT>&[crlf];&[OFF];
+	    &[ON];<input type="reset"></INPUT>&[crlf];&[OFF];
+	    &[ON];<input type="submit" name="ShowDefaults" value="Show Defaults"></INPUT>&[crlf];&[OFF];
+	    &[ON];<input type="submit" name="ShowCurrentSettings" value="Show Current Settings"></INPUT></center>&[crlf];&[OFF];
+	<MvASSIGN NAME = "footer" VALUE = "{ReconvertTags(footer)}"></MvASSIGN>
+	&[ON];</form></center></p><hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ShowRemoveEntries">
+
+	<MvIF EXPR = "{parm_starting_root EQ ''}">
+		<MvASSIGN NAME = "parm_starting_root" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	<MvEVAL EXPR = FindStartingEntry(numberofentries_admin,backintime,forwardintime,parm_starting_root)></MvEVAL>
+	<MvASSIGN NAME = "skip_amount" VALUE = "{starting_entry - 1}"></MvASSIGN>
+	<MvOPEN NAME = "&[dbname];" DATABASE = "&[database];" INDEXES = ""></MvOPEN>
+	<MvSKIP ROWS = "&[skip_amount];"></MvSKIP>
+	<MvEVAL EXPR = ShowRemoveHeader()></MvEVAL>
+	<MvASSIGN NAME = "entry_count" VALUE = "{'0'}"></MvASSIGN>
+	<MvASSIGN NAME = "is_last_page" VALUE = "{'0'}"></MvASSIGN>
+
+	<MvIF EXPR = "{recno EQ totrec}">
+		<MvEVAL EXPR = AddAdminLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+		<MvASSIGN NAME = "is_last_page" VALUE = "{'1'}"></MvASSIGN>
+	<MvELSE></MvELSE>
+		<MvWHILE EXPR = "{entry_count LT numberofentries_admin}">
+			<MvEVAL EXPR = AddAdminLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+			<MvASSIGN NAME = "entry_count" VALUE = "{entry_count + 1}"></MvASSIGN>
+			<MvSKIP></MvSKIP>
+			<MvIF EXPR = "{recno EQ totrec}">
+				<MvIF EXPR = "{entry_count LT numberofentries_admin}">
+					<MvEVAL EXPR = AddAdminLine(parm_admin_flag,parm_user,parm_pass)></MvEVAL>
+					<MvASSIGN NAME = "is_last_page" VALUE = "{'1'}"></MvASSIGN>
+				</MvIF>
+				<MvWHILESTOP></MvWHILESTOP>
+			</MvIF>
+		</MvWHILE>
+	</MvIF>
+	<MvASSIGN NAME = "ending_item" VALUE = "{recno}"></MvASSIGN>
+	<MvCLOSE NAME = "&[dbname];"></MvCLOSE>
+
+	<MvEVAL EXPR = ShowRemoveWrapup(numberofentries_admin)></MvEVAL>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "FindStartingEntry" PARAMETERS = "num_to_view,backintime,forwardintime,startingroot">
+
+	<MvIF EXPR = "{forwardintime NE ''}">
+		<MvASSIGN NAME = "starting_entry" VALUE = "{startingroot + num_to_view}"></MvASSIGN>
+	<MvELSE></MvELSE>	
+	<MvIF EXPR = "{backintime NE ''}">
+		<MvASSIGN NAME = "starting_entry" VALUE = "{startingroot - num_to_view}"></MvASSIGN>
+	<MvELSE></MvELSE>
+		<MvASSIGN NAME = "starting_entry" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	</MvIF>
+
+	<MvASSIGN NAME = "starting_root" VALUE = "{starting_entry}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ShowRemoveHeader">
+
+	&[ON];&[header];<title>Remove Entries</title>&[crlf];&[OFF];
+	&[ON];<center><h1>Remove Entries from &[title];</h1></center>&[crlf];&[OFF];
+	&[ON];<ul>Select below those entries you wish to remove.&[crlf];&[OFF];
+	&[ON];</ul><p></p>&[crlf];&[OFF];
+
+	&[ON];<hr width=90%><center><font size=-1>&[crlf];&[OFF];
+	&[ON];[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2];</a> ]&[crlf];&[OFF];
+	&[ON];</font></center><hr width=90%>&[crlf];&[OFF];
+
+	&[ON];<p>&[crlf];&[OFF];
+
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];+parm_starting_root=&[starting_root];">&[crlf];&[OFF];
+	&[ON];<input type=hidden name="action" value="remove_entries"></INPUT>&[crlf];&[OFF];
+	&[ON];<input type=hidden name="start_item" value="&[recno];"></INPUT>&[crlf];&[OFF];
+	
+	&[ON];<center>&[crlf];&[OFF];
+	&[ON];<table border width="90%">&[crlf];&[OFF];
+	&[ON];<tr><th>Remove?</th><th>Date</th><th>Time</th><th>Author</th><th>Beginning of Comments</th></tr>&[crlf];&[OFF];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ShowRemoveWrapup" PARAMETERS = "entries">
+
+	&[ON];</table>&[crlf];&[OFF];
+	&[ON];<p>&[crlf];&[OFF];
+	&[ON];<input type=submit value="Remove Messages"></INPUT> <input type=reset></INPUT>&[crlf];&[OFF];
+
+	<MvIF EXPR = "{is_last_page NE '1'}">
+		&[ON];<input name="forwardintime" type="submit" value="Next Page"></INPUT>&[crlf];&[OFF];
+	</MvIF>
+
+	<MvIF EXPR = "{starting_root GT entries}">
+		&[ON];<input name="backintime" type="submit" value="Previous Page"></INPUT>&[crlf];&[OFF];
+	</MvIF>
+
+	&[ON];<input type=hidden name="end_item" value="&[ending_item];"></INPUT>&[crlf];&[OFF];
+	&[ON];</form></p>&[crlf];&[OFF];
+
+	&[ON];<hr width=90%><center><font size=-1>&[crlf];&[OFF];
+	&[ON];[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2];</a> ]&[crlf];&[OFF];
+	&[ON];</font></center>&[crlf];&[OFF];
+
+	&[ON];</center>&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "AddAdminLine" PARAMETERS = "x,y,z">
+
+	<MvASSIGN NAME = "print_comment" VALUE = "{substring(dbcomment1,1,50)}"></MvASSIGN>
+
+	&[ON];<tr>&[crlf];&[OFF];
+	<MvASSIGN NAME = "l.entry" VALUE = "{'form_' $ &[recno];}"></MvASSIGN>
+	&[ON];<td align="center"><input type=checkbox name="&[l.entry];" align="center"></INPUT></td>&[crlf];&[OFF];
+	&[ON];<td align="center">&[dbdate];</td>&[crlf];&[OFF];
+	&[ON];<td align="center">&[dbtime];</td>&[crlf];&[OFF];
+	&[ON];<td>&[dbname1];</td>&[crlf];&[OFF];
+	&[ON];<td>&[print_comment];</td>&[crlf];&[OFF];
+	&[ON];</tr>&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>#################################################################
+# Remove Action                                                            #
+#									   #
+#	Go through only those database records in the range of the         #
+#	entries appearing on the page just displayed.  If the entry        #
+#	is marked for deletion, remove it.				   #
+################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "RemoveEntries">
+
+	<MvEVAL EXPR = RemoveSetup()></MvEVAL>
+
+	<MvASSIGN NAME = "num_no_file" VALUE = "{'0'}"></MvASSIGN>
+	<MvASSIGN NAME = "num_not_removed" VALUE = "{'0'}"></MvASSIGN>
+	<MvASSIGN NAME = "num_attempted" VALUE = "{'0'}"></MvASSIGN>
+	<MvWHILE EXPR = "{NOT &[dbname];.d.eof}">
+		<MvCOMMENT> If checked for removal </MvCOMMENT>                                            
+		<MvASSIGN NAME = "w1" VALUE = "{'form_' $ recno}"></MvASSIGN>
+		<MvASSIGN NAME = "w2" VALUE = "{&[w1];}"></MvASSIGN>
+		<MvIF EXPR = "{w2 EQ 'on'}">
+			<MvDELETE NAME = "&[dbname];"></MvDELETE>
+			<MvASSIGN NAME = "num_attempted" VALUE = "{num_attempted + 1}"></MvASSIGN>
+			<MvIF EXPR = "{num_attempted GT 1}">
+				<MvASSIGN NAME = "{'attempted' $ &[num_attempted];}"
+					VALUE = "{'& \"' $ dbdate $ ' ' $ dbtime $ '\"'}"></MvASSIGN>
+			<MvELSE></MvELSE>
+				<MvASSIGN NAME = "{'attempted' $ &[num_attempted];}"
+					VALUE = "{'\"' $ dbdate $ ' ' $ dbtime $ '\"'}"></MvASSIGN>
+			</MvIF>
+		</MvIF>
+		<MvSKIP></MvSKIP>
+	</MvWHILE>
+
+	<MvPACK NAME = &[dbname];></MvPACK>
+	<MvCLOSE NAME = "&[dbname];"></MvCLOSE>
+
+	<MvEVAL EXPR = ReturnHtml()></MvEVAL>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "RemoveSetup">
+
+	<MvASSIGN NAME = "username" VALUE = "{parm_user}"></MvASSIGN>
+	<MvASSIGN NAME = "password" VALUE = "{parm_pass}"></MvASSIGN>
+	<MvEVAL EXPR = CheckIdentity()></MvEVAL>
+
+	<MvASSIGN NAME = "roots_displayed_count" VALUE = "{'0'}"></MvASSIGN>
+	<MvOPEN NAME = "&[dbname];" DATABASE = "&[database];" INDEXES = ""></MvOPEN>
+	<MvFILTER NAME = "&[dbname];"
+		FILTER = "{recno GE start_item AND recno LE end_item}"></MvFILTER>
+	<MvASSIGN NAME = "roots_per_page" VALUE = "{numberofentries_admin}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ReturnHtml">
+
+	&[ON];&[header];&[crlf];&[OFF];
+	&[ON];<center><h1>Results of &[title]; Entry Removal</h1></center>&[crlf];&[OFF];
+
+	&[ON];<blockquote>Below is a short summary of what entries were removed.&[crlf];&[OFF];
+	&[ON];<p></p></blockquote><hr width=90%><p>&[crlf];&[OFF];
+
+	&[ON];<blockquote><b>Entries Removed:</b>&[crlf];&[OFF];
+	<MvASSIGN NAME = "subscript" VALUE = "{'1'}"></MvASSIGN>
+	<MvWHILE EXPR = "{subscript LE num_attempted}">
+		<MvASSIGN NAME = "w1" VALUE = "{'attempted' $ &[subscript];}"></MvASSIGN>
+		<MvASSIGN NAME = "w2" VALUE = "{&[w1];}"></MvASSIGN>
+		&[ON];&[w2];&[longspace];&[crlf];&[OFF];
+		<MvASSIGN NAME = "subscript" VALUE = "{subscript + 1}"></MvASSIGN>
+	</MvWHILE>
+	&[ON];<p>&[crlf];&[OFF];
+
+	<MvIF EXPR = "{num_not_removed GT '0'}">
+		&[ON];<b>Entries That Could Not Be Deleted:</b>&[crlf];&[OFF];
+		<MvASSIGN NAME = "subscript" VALUE = "{'1'}"></MvASSIGN>
+		<MvWHILE EXPR = "{subscript LE num_not_removed}">
+			<MvASSIGN NAME = "w1" VALUE = "{'not_removed' $ &[subscript];}"></MvASSIGN>
+			<MvASSIGN NAME = "w2" VALUE = "{&[w1];}"></MvASSIGN>
+			&[ON];&[w2];&[longspace];&[crlf];&[OFF];
+			<MvASSIGN NAME = "subscript" VALUE = "{subscript + 1}"></MvASSIGN>
+		</MvWHILE>
+		&[ON];<p>&[crlf];&[OFF];
+	</MvIF>	
+
+	<MvIF EXPR = "{num_no_file GT '0'}">
+		&[ON];<b>Entries Not Found:</b>&[crlf];&[OFF];
+		<MvASSIGN NAME = "subscript" VALUE = "{'1'}"></MvASSIGN>
+		<MvWHILE EXPR = "{subscript LE num_no_file}">
+			<MvASSIGN NAME = "w1" VALUE = "{'no_file' $ &[subscript];}"></MvASSIGN>
+			<MvASSIGN NAME = "w2" VALUE = "{&[w1];}"></MvASSIGN>
+			&[ON];&[w2];&[longspace];&[crlf];&[OFF];
+			<MvASSIGN NAME = "subscript" VALUE = "{subscript + 1}"></MvASSIGN>
+		</MvWHILE>
+		&[ON];<p>&[crlf];&[OFF];
+	</MvIF>
+
+	&[ON];</blockquote><hr width=90%><blockquote><center><font size=-1>&[crlf];&[OFF];
+	&[ON];[ <a href="&[documenturl];parm_func=admin+parm_admin_func=show_remove_entries+parm_user=&[parm_user];+parm_pass=&[parm_pass];">Remove Entries</a> ] &[crlf];&[OFF];
+	&[ON];[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2];</a> ]&[crlf];&[OFF];
+	&[ON];</font></center></p></blockquote>&[crlf];&[OFF];
+	&[ON];<hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+	<MvEXIT</MvEXIT>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "GetSettings">
+
+	<MvIMPORT FILE = "&[configfile];" DELIMITER = "!!##!!" FIELDS = 
+		"	
+			numberofentries,
+			numberofentries_admin,
+			mailtome,
+			mailto,
+			mailhost,
+			mailfrom,
+			time_zone,
+			title,
+			header,
+			linkline,
+			footer
+		"
+	>
+	</MvIMPORT>
+
+	<MvIF EXPR = "{numberofentries EQ '0'}">
+		<MvASSIGN NAME = "numberofentries" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	<MvIF EXPR = "{numberofentries_admin EQ '0'}">
+		<MvASSIGN NAME = "numberofentries_admin" VALUE = "{'1'}"></MvASSIGN>
+	</MvIF>
+	<MvASSIGN NAME = "title2" VALUE = "{title $ ' Admin'}"></MvASSIGN>
+                                                    
+</MvFUNCTION>
+
+
+<MvCOMMENT>##########################################################################
+# Change Settings                                                          	    #
+#########################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ChangeSettings" PARAMETERS = "uname,pass">
+
+	<MvIF EXPR = "{SubmitChanges NE ''}">
+		<MvEVAL EXPR = CopySettings()></MvEVAL>
+		<MvASSIGN NAME = "xxx" VALUE = "{fdelete(configfile)}"></MvASSIGN>
+		<MvEVAL EXPR = ExportSettings()></MvEVAL>
+		<MvEVAL EXPR = ChooseAdminFunction(uname,pass)></MvEVAL>
+	<MvELSE></MvELSE>		<MvCOMMENT> Show Defaults </MvCOMMENT>
+	<MvIF EXPR = "{ShowDefaults NE ''}">
+		<MvEVAL EXPR = AssignDefaultSettings()></MvEVAL>
+		<MvEVAL EXPR = ShowChangeSettings()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{ShowCurrentSettings NE ''}">
+		<MvEVAL EXPR = GetSettings()></MvEVAL>
+		<MvEVAL EXPR = ShowChangeSettings()></MvEVAL>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME ="CopySettings">
+
+	<MvASSIGN NAME = "numberofentries" 	VALUE = "{ConvertTags(form_numberofentries)}"></MvASSIGN>
+	<MvASSIGN NAME = "numberofentries_admin" VALUE = "{ConvertTags(form_numberofentries_admin)}"></MvASSIGN>
+
+	<MvASSIGN NAME = "mailtome" 		VALUE = "{ConvertTags(form_mailtome)}"></MvASSIGN>
+	<MvEVAL EXPR = EditMailto()></MvEVAL>
+	<MvASSIGN NAME = "mailhost" 		VALUE = "{ConvertTags(form_mailhost)}"></MvASSIGN>
+	<MvEVAL EXPR = EditMailfrom()></MvEVAL>
+
+	<MvASSIGN NAME = "time_zone"	 	VALUE = "{ConvertTags(form_time_zone)}"></MvASSIGN>
+	<MvASSIGN NAME = "title" 		VALUE = "{ConvertTags(form_title)}"></MvASSIGN>
+	<MvASSIGN NAME = "title2" 		VALUE = "{title $ ' Admin'}"></MvASSIGN>
+
+	<MvASSIGN NAME = "header"		VALUE = "{ReconvertTags(form_header)}"></MvASSIGN>
+	<MvASSIGN NAME = "form_linkline"	VALUE = "{ReconvertTags(form_linkline)}"></MvASSIGN>
+	<MvASSIGN NAME = "form_footer"		VALUE = "{ReconvertTags(form_footer)}"></MvASSIGN>
+
+	<MvASSIGN NAME = "work_linkline"	VALUE = "{''}"></MvASSIGN>
+	<MvASSIGN NAME = "a1"			VALUE = "{'view\"\>' CIN form_linkline}"></MvASSIGN>
+	<MvIF EXPR = "{a1 GT '0'}">
+		<MvASSIGN NAME = "work_linkline"
+			 VALUE = "{work_linkline $ substring(form_linkline,1,a1+5)}"></MvASSIGN>
+		<MvASSIGN NAME = "work_linkline"
+			 VALUE = "{work_linkline $ title}"></MvASSIGN>
+		<MvASSIGN NAME = "a2"
+			 VALUE = "{'<' CIN substring(form_linkline,a1+6,len(form_linkline)-(a1+5))}"></MvASSIGN>
+		<MvASSIGN NAME = "work_linkline"
+			 VALUE = "{work_linkline $ substring(form_linkline,a1+5+a2,len(form_linkline)-(a1+3+a2))}"></MvASSIGN>
+		<MvASSIGN NAME = "linkline" VALUE = "{work_linkline}"></MvASSIGN>
+	<MvELSE></MvELSE>
+		<MvASSIGN NAME = "linkline" VALUE = "{form_linkline}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "work_footer"	VALUE = "{''}"></MvASSIGN>
+	<MvASSIGN NAME = "a1"		VALUE = "{'view\"\>' CIN form_footer}"></MvASSIGN>
+	<MvIF EXPR = "{a1 GT '0'}">
+		<MvASSIGN NAME = "work_footer"
+			 VALUE = "{work_footer $ substring(form_footer,1,a1+5)}"></MvASSIGN>
+		<MvASSIGN NAME = "work_footer"
+			 VALUE = "{work_footer $ title}"></MvASSIGN>
+		<MvASSIGN NAME = "a2"
+			 VALUE = "{'<' CIN substring(form_footer,a1+6,len(form_footer)-(a1+5))}"></MvASSIGN>
+		<MvASSIGN NAME = "work_footer"
+			 VALUE = "{work_footer $ substring(form_footer,a1+5+a2,len(form_footer)-(a1+3+a2))}"></MvASSIGN>
+		<MvASSIGN NAME = "footer" VALUE = "{work_footer}"></MvASSIGN>
+	<MvELSE></MvELSE>
+		<MvASSIGN NAME = "footer" VALUE = "{form_footer}"></MvASSIGN>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "EditMailto">
+
+	<MvASSIGN NAME = "mailto" VALUE = "{ConvertTags(form_mailto)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailto" VALUE = "{glosub(mailto,longless,less)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailto" VALUE = "{glosub(mailto,longgreater,greater)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailto_result" VALUE = "{SM_clean_email_address(mailto)}"></MvASSIGN>
+	<MvIF EXPR = "{'Error:' CIN mailto_result}">
+		<MvEVAL EXPR = Error2("mailto","ShowChangeSettings")></MvEVAL>
+	<MvELSE></MvELSE>
+		<MvASSIGN NAME = "mailto" VALUE = "{mailto_result}"></MvASSIGN>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "EditMailfrom">
+
+	<MvASSIGN NAME = "mailfrom" VALUE = "{ConvertTags(form_mailfrom)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailfrom" VALUE = "{glosub(mailfrom,longless,less)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailfrom" VALUE = "{glosub(mailfrom,longgreater,greater)}"></MvASSIGN>
+	<MvASSIGN NAME = "mailfrom_result" VALUE = "{SM_clean_email_address(mailfrom)}"></MvASSIGN>
+	<MvIF EXPR = "{'Error:' CIN mailfrom_result}">
+		<MvEVAL EXPR = Error2("mailfrom","ShowChangeSettings")></MvEVAL>
+	<MvELSE></MvELSE>
+		<MvASSIGN NAME = "mailfrom" VALUE = "{mailfrom_result}"></MvASSIGN>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ExportSettings">
+
+	<MvEXPORT FILE = "&[configfile];" DELIMITER = "!!##!!" FIELDS = 
+		"numberofentries,
+		 numberofentries_admin,
+		 mailtome,
+		 mailto,
+		 mailhost,
+		 mailfrom,
+		 time_zone,
+		 title,
+		 header,
+		 linkline,
+		 footer
+		"
+	></MvEXPORT>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "AssignDefaultSettings">
+
+	<MvASSIGN NAME = "numberofentries"	VALUE = "{'5'}"></MvASSIGN>
+	<MvASSIGN NAME = "numberofentries_admin" VALUE = "{'5'}"></MvASSIGN>
+	<MvASSIGN NAME = "mailtome"		VALUE = "{'off'}"></MvASSIGN>
+	<MvASSIGN NAME = "mailto"		VALUE = "{''}"></MvASSIGN>
+	<MvASSIGN NAME = "mailhost"		VALUE = "{''}"></MvASSIGN>
+	<MvASSIGN NAME = "mailfrom"		VALUE = "{''}"></MvASSIGN>
+	<MvASSIGN NAME = "time_zone"		VALUE = "{'-8'}"></MvASSIGN>
+	<MvASSIGN NAME = "title"		VALUE = "{'Guestbook'}"></MvASSIGN>
+
+	<MvASSIGN NAME = "title2" VALUE = "{title $ ' Admin'}"></MvASSIGN>
+
+	<MvASSIGN NAME = "header" VALUE = "{
+		  '<BODY bgcolor=#ffffff>' $ '&[crlf];'
+		$ '<center><img src=\"http://www.simplenet.com/images/logosmall.gif\"></center>' $ '&[crlf];'
+	}"></MvASSIGN>
+
+	<MvASSIGN NAME = "links" 
+		 VALUE = "{link_main_short_dflt $ ' ' $ link_post_short}"></MvASSIGN>
+
+	<MvASSIGN NAME = "linkline" VALUE = 
+	"{
+		'<hr width=\"90%\"><center>' $ '&[crlf];'
+		$ links $ '&[crlf];'
+		$ '</center>' $ '&[crlf];'
+		$ '<hr width=\"90%\">' $ '&[crlf];'
+
+	}"></MvASSIGN>
+
+	<MvASSIGN NAME = "footer" VALUE = 
+		"{'</body></html>&[crlf];'}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFunction name="SM_clean_email_address"
+	parameters="SM_input_address">
+	<MvComment>
+	Take an incoming string that should contain an e-mail address or addresses and
+	format it for use with strict address format checking.
+
+	First, convert tab to space, just in case they got one in there somehow.
+	</MvComment>
+	<MvIF EXPR="{ asciichar(9) IN SM_input_address }">
+		<MvASSIGN name="SM_input_address"
+			value="{glosub(SM_input_address,asciichar(9),asciichar(32)}">
+	</MvIF>
+	<MvIF EXPR="{ asciichar(32) IN SM_input_address }">
+		<MvComment>
+		Be super paranoid, smash extra spaces
+		</MvComment>
+		<MvWHILE EXPR="{ asciichar(32) $ asciichar(32) IN SM_input_address }">
+			<MvASSIGN name="SM_input_address"
+				value="{glosub(SM_input_address,asciichar(32) $
+					asciichar(32),asciichar(32))}">
+		</MvWHILE>
+		<MvComment> Now convert single spaces to commas </MvComment>
+		<MvASSIGN name="SM_input_address"
+			value="{ glosub(SM_input_address,asciichar(32),asciichar(44))}">
+	</MvIF>
+	<MvComment>
+	Just in case something weird happened, turn double commas  into single
+	</MvComment>
+	<MvWHILE EXPR="{ asciichar(44) $ asciichar(44) IN SM_input_address }">
+		<MvASSIGN name="SM_input_address"
+			value="{glosub(SM_input_address,asciichar(44) $ asciichar(44),asciichar(44)}">
+	</MvWHILE>
+	<MvComment>
+	Now we take the comma delimited list and make sure every item is valid
+	and is enclosed in angle brackets.
+	</MvComment>
+	<MvASSIGN name="local.counter" value="1">
+	<MvWHILE EXPR="{ gettoken(SM_input_address,asciichar(44),local.counter)}">
+		<MvASSIGN name="local.SM_email_temp"
+			value="{gettoken(SM_input_address,asciichar(44),local.counter)}">
+		<MvIF EXPR="{ NOT ('@' IN local.SM_email_temp)}">
+			<MvFUNCRETURN
+				value="{'Error: &quot;' $ local.SM_email_temp $ '&quot; is not a valid e-mail address'}">
+		</MvIF>
+		<MvIF EXPR="{ NOT ('.' IN gettoken(local.SM_email_temp,'@',2))}">
+			<MvFUNCRETURN
+				value="{'Error: ' $ local.SM_email_temp $
+				' is not a valid e-mail address because ' $
+				gettoken(local.SM_email_temp,'@',2) $ ' is not a valid hostname' }">
+		</MvIF>
+		<MvIF EXPR="{('<' IN local.SM_email_temp) NE 1}">
+			<MvASSIGN name="local.SM_email_temp"
+				value="{'<' $ local.SM_email_temp}">
+		</MvIF>
+		<MvIF EXPR="{('>' EIN local.SM_email_temp) NE len(local.SM_email_temp)}">
+			<MvASSIGN name="local.SM_email_temp"
+				value="{local.SM_email_temp $ '>'}">
+		</MvIF>
+			<MvASSIGN name="local.SM_email_final"
+				value="{local.SM_email_final $ local.SM_email_temp $ ','}">
+		<MvASSIGN name="local.counter" value="{local.counter + 1}">
+	</MvWHILE>
+	<MvComment>
+	Strip the trailing comma for neatness' sake
+	</MvComment>
+	<MvFUNCRETURN
+		value="{substring(local.SM_email_final,1,len(local.SM_email_final)-1)}">
+</MvFunction SM_clean_email_address>
+
+
+<MvCOMMENT>###########################################################################################
+
+	IDENTITY FUNCTIONS
+
+###########################################################################################</MvCOMMENT>
+
+
+<MvFUNCTION NAME = "CheckIdentity">
+
+	<MvASSIGN NAME = "username" VALUE = "{ConvertTags(username)}"></MvASSIGN>
+	<MvASSIGN NAME = "password" VALUE = "{ConvertTags(password)}"></MvASSIGN>
+
+	<MvIMPORT FILE = "&[passwdfile];" FIELDS = "usrname,passwd" DELIMITER = ":">
+	</MvIMPORT>
+
+	<MvIF EXPR = "{username NE usrname}">
+		<MvEVAL EXPR = Error2("bad_usrname2,"")></MvEVAL>
+	</MvIF>
+
+	<MvASSIGN NAME = "test_passwd" VALUE = "{crlf IN passwd}"></MvASSIGN>
+
+	<MvIF EXPR = "{test_passwd GT '0'}">
+		<MvASSIGN NAME = "passwd" VALUE = "{substring(passwd, 1, test_passwd-1)}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "test_passwd" VALUE = "{password CRYPT substring(passwd, 1, 2)}"></MvASSIGN>
+
+	<MvIF EXPR = "{test_passwd NE passwd}">
+		<MvEVAL EXPR = Error2("bad_passwd2","")></MvEVAL>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ReturnHtml2">
+
+	&[ON];&[header];&[crlf];&[OFF];
+	&[ON];<center><h1>&[title]; Admin Identity Changed</h1></center>&[crlf];&[OFF];
+	&[ON];<ul>Your Identity for &[title]; Admin has been changed!  Results are below:<p></p></ul><hr width=90%><ul><p>&[crlf];&[OFF];
+	&[ON];<b>User Name: &[new_usrname];</p><p>&[crlf];&[OFF];
+	&[ON];Password: &[passwd_1];</b></p><p>&[crlf];&[OFF];
+	&[ON];</p></ul><hr width=90%><p>&[crlf];&[OFF];
+	&[ON];<ul>Do not forget these, since they are now encoded in a file and not readable!.</ul></p>&[crlf];&[OFF];
+	&[ON];<hr width=90%><center>[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2];</a> ]</center>&[crlf];&[OFF];
+	&[ON];<hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>#########################################################
+#  Subroutine used for Welcome name/password checking only         #
+########################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "CheckIdentity2" PARAMETERS = "originator">
+
+	<MvASSIGN NAME = "username" VALUE = "{ConvertTags(username)}"></MvASSIGN>
+	<MvASSIGN NAME = "password" VALUE = "{ConvertTags(password)}"></MvASSIGN>
+
+	<MvIMPORT FILE = "&[passwdfile];" FIELDS = "usrname,passwd" DELIMITER = ":">
+	</MvIMPORT>
+
+	<MvIF EXPR = "{username NE usrname}">
+		<MvEVAL EXPR = Error2("bad_usrname2","&[originator];")></MvEVAL>
+	</MvIF>
+
+	<MvASSIGN NAME = "test_passwd" VALUE = "{crlf IN passwd}"></MvASSIGN>
+
+	<MvIF EXPR = "{test_passwd GT '0'}">
+		<MvASSIGN NAME = "passwd" VALUE = "{substring(passwd, 1, test_passwd-1)}"></MvASSIGN>
+	</MvIF>
+
+	<MvASSIGN NAME = "test_passwd" VALUE = "{password CRYPT substring(passwd, 1, 2)}"></MvASSIGN>
+
+	<MvIF EXPR = "{test_passwd NE passwd}">
+		<MvEVAL EXPR = Error2("bad_passwd2","&[originator];")></MvEVAL>
+	</MvIF>
+
+</MvFUNCTION>
+
+
+############################################################################
+# Provide Username and Password                                            #
+#       To use admin, user must provide name and password matching         #
+#	stored values.                                                     #
+################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ShowProveIdentity">
+
+	&[ON];<html><head>&[header];<title>Welcome to Guestbook Administration!</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor="#ffffff"><center><h1>Welcome to Guestbook Administration!</h1></center>&[crlf];&[OFF];
+	&[ON];<center>Please provide your user name and password below. All admin functions&[crlf];&[OFF];
+	&[ON];require name and password.&[crlf];&[OFF];
+	&[ON];</center><p><hr width=90%></p>&[crlf];&[OFF];
+	&[ON];<p>&[crlf];&[OFF];
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin">&[crlf];&[OFF];
+	&[ON];<input type=hidden name="action" value="prove_identity"></INPUT>&[crlf];&[OFF];
+	&[ON];<center><table border=0>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Username: </th><td><input type=text name="username" value=&[username];></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Password: </th><td><input type=password name="password" value=&[password];></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr></tr><tr></tr><tr></tr><tr>&[crlf];&[OFF];
+	&[ON];<td align=center><input type=submit value="Submit"></INPUT> </td><td align=center><input type=reset></INPUT></td>&[crlf];&[OFF];
+	&[ON];</tr></table></center>&[crlf];&[OFF];
+	&[ON];</form></p>&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>#########################################################################
+# Provide Username and Password                                            #
+#       The first time in, the admin must set up his or her password.      #
+#########################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ShowProvideIdentity">
+
+	&[ON];<html><head>&[header];<title>Welcome to Guestbook Administration!</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor="#ffffff"><center><h1>Welcome to Guestbook Administration!</h1></center>&[crlf];&[OFF];
+	&[ON];<ul>Fill out the form below to provide your user name and password.&[crlf];&[OFF];
+	&[ON];Please make a note of these values.  All admin functions require name and password.&[crlf];&[OFF];
+	&[ON];<p><b><font color="#ff0000"><center>To use Guestbook Admin after this, make sure you bookmark this page now.&[crlf];&[OFF];
+	&[ON];</center></font></b></p><p/><hr width=90%>&[crlf];&[OFF];
+	&[ON];</ul><p>&[crlf];&[OFF];
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin">&[crlf];&[OFF];
+	&[ON];<input type=hidden name="action" value="provide_identity"></INPUT>&[crlf];&[OFF];
+	&[ON];<center><table border=0>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Username: </th><td><input type=text name="p_user" value=&[p_user];></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Password: </th><td><input type=password name="p_pass1" value=&[p_pass1];></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Re-type Password: </th><td><input type=password name="p_pass2" value=&[p_pass2];></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>&[crlf];&[OFF];
+	&[ON];<td align=center><input type=submit value="Submit"></INPUT> </td><td align=center><input type=reset></INPUT></td>&[crlf];&[OFF];
+	&[ON];</tr></table></center>&[crlf];&[OFF];
+	&[ON];</form></p><hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>##########################################################################
+# Change Identity                                                                   #
+#       By calling this section of the script, the admin can change his or          #
+#   her password.							            #
+#########################################################################</MvCOMMENT>
+
+
+<MvFUNCTION NAME = "ShowChangeIdentity">
+
+	&[ON];<html><head>&[header];<title>Change &[title]; Admin User Name or Password</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor="#ffffff"><center><h1>Change &[title]; Admin<br>User Name or Password</h1></center>&[crlf];&[OFF];
+	&[ON];<ul>Fill out the form below to change your user name or password.&[crlf];&[OFF];
+	&[ON];If new user name is left blank, your old one will be assumed.&[crlf];&[OFF];
+	&[ON];<p/></ul>&[crlf];&[OFF];
+	&[ON];<hr width=90%>&[crlf];&[OFF];
+	&[ON];<p>&[crlf];&[OFF];
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[crlf];&[OFF];
+	&[ON];<input type=hidden name="action" value="change_identity"></INPUT>&[crlf];&[OFF];
+	&[ON];<center><table border=0>&[crlf];&[OFF];
+	&[ON];<tr>&[crlf];&[OFF];
+	&[ON];<th align=left>User Name: </th><td><input type=text name="username" value="&[username];"></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Password: </th><td><input type=password name="password" value="&[password];"></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr> </tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>New User Name: </th><td><input type=text name="new_username" value="&[new_username];"></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>New Password: </th><td><input type=password name="passwd_1" value="&[passwd_1];"></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<th align=left>Re-type New Password: </th><td><input type=password name="passwd_2" value="&[passwd_2];"></INPUT><br></td>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];</tr><tr>&[crlf];&[OFF];
+	&[ON];<td align=center><input type=submit value="Change Identity"></INPUT> </td><td align=center><input type=reset></INPUT></td>&[crlf];&[OFF];
+	&[ON];</tr></table></center>&[crlf];&[OFF];
+	&[ON];</form></p>&[crlf];&[OFF];
+	&[ON];<hr width=90%>&[crlf];&[OFF];
+	&[ON];<center>[ <a href="&[documenturl];parm_func=admin+parm_admin_func=null+parm_user=&[parm_user];+parm_pass=&[parm_pass];">&[title2];</a> ]</center>&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ProvideIdentity" PARAMETERS = "originator">
+
+	<MvASSIGN NAME = "p_user" VALUE = "{ConvertTags(p_user)}"></MvASSIGN>
+	<MvASSIGN NAME = "p_pass1" VALUE = "{ConvertTags(p_pass1)}"></MvASSIGN>
+	<MvASSIGN NAME = "p_pass2" VALUE = "{ConvertTags(p_pass2)}"></MvASSIGN>
+
+	<MvIF EXPR = "{p_user EQ ''}">
+		<MvEVAL EXPR = Error2("no_name2","&[originator];")></MvEVAL>
+	</MvIF>
+
+	<MvIF EXPR = "{p_pass1 EQ ''}">
+		<MvEVAL EXPR = Error2("empty_password2","&[originator];")></MvEVAL>
+	</MvIF>
+
+	<MvIF EXPR = "{' ' CIN p_user}">
+		<MvEVAL EXPR = Error2("blank_in_username","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{' ' CIN p_pass1}">
+		<MvEVAL EXPR = Error2("blank_in_new_password","&[originator];")></MvEVAL>
+	</MvIF>
+	</MvIF>
+
+	<MvIF EXPR = "{p_pass1 NE p_pass2}">
+		<MvEVAL EXPR = Error2("not_same2","&[originator];")></MvEVAL>
+	</MvIF>
+
+	<MvASSIGN NAME = "new_passwd" VALUE = "{p_pass1 CRYPT substring(p_pass1, 1, 2)}"></MvASSIGN>
+
+	<MvASSIGN NAME = "xxx" VALUE = "{fdelete(passwdfile)}"></MvASSIGN>
+
+	<MvEXPORT FILE = "&[passwdfile];" FIELDS = "p_user,new_passwd" DELIMITER = ":"></MvEXPORT>
+
+	<MvCOMMENT> If admin forgot password, we delete just passwd file, they get welcome page,
+	    they fill in info, should get admin menu --- this won't happen if action still
+	    set to "provide_identity", so clear it now.
+	</MvCOMMENT>
+
+	<MvASSIGN NAME = "action" VALUE = "{''}"></MvASSIGN>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "ChangeIdentity" PARAMETERS = "originator">
+
+	<MvASSIGN NAME = "username" VALUE = "{ConvertTags(username)}"></MvASSIGN>
+	<MvASSIGN NAME = "password" VALUE = "{ConvertTags(password)}"></MvASSIGN>
+	<MvASSIGN NAME = "new_username" VALUE = "{ConvertTags(new_username)}"></MvASSIGN>
+	<MvASSIGN NAME = "passwd_1" VALUE = "{ConvertTags(passwd_1)}"></MvASSIGN>
+	<MvASSIGN NAME = "passwd_2" VALUE = "{ConvertTags(passwd_2)}"></MvASSIGN>
+
+	<MvIF EXPR = "{username EQ ''}">
+		<MvEVAL EXPR = Error2("no_name","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{password EQ ''}">
+		<MvEVAL EXPR = Error2("empty_password2","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{' ' CIN new_username}">
+		<MvEVAL EXPR = Error2("blank_in_username","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{' ' CIN passwd1}">
+		<MvEVAL EXPR = Error2("blank_in_new_password","&[originator];")></MvEVAL>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+
+	<MvIF EXPR = "{passwd_1 NE passwd_2}">
+		<MvEVAL EXPR = Error2("not_same","&[originator];")></MvEVAL>
+	</MvIF>
+
+	<MvIMPORT FILE = "&[passwdfile];" FIELDS = "usrname,passwd" DELIMITER = ":">
+	</MvIMPORT>
+
+	<MvASSIGN NAME = "test_passwd" VALUE = "{password CRYPT substring(passwd, 1, 2)}"></MvASSIGN>
+
+	<MvIF EXPR = "{test_passwd NE passwd}">
+		<MvEVAL EXPR = Error2("bad_passwd2","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{username NE usrname}">
+		<MvEVAL EXPR = Error2("bad_usrname2","&[originator];")></MvEVAL>
+	<MvELSE></MvELSE>
+		<MvIF EXPR = "{passwd_1 NE ''}">
+			<MvASSIGN NAME = "new_passwd" VALUE = "{passwd_1 CRYPT substring(passwd, 1, 2)}"></MvASSIGN>
+		<MvELSE></MvELSE>
+			<MvASSIGN NAME = "new_passwd" VALUE = "{test_passwd}"></MvASSIGN>
+		</MvIF>
+
+		<MvIF EXPR = "{new_username NE ''}">
+			<MvASSIGN NAME = "new_usrname" VALUE = "{new_username}"></MvASSIGN>
+			<MvIF EXPR = "{passwd_1 EQ ''}">
+				<MvASSIGN NAME = "passwd_1" VALUE = "{password}"></MvASSIGN>
+			</MvIF>
+		<MvELSE></MvELSE>
+			<MvIF EXPR = "{passwd_1 EQ ''}">
+				<MvEVAL EXPR = Error2("empty_password","&[originator];")></MvEVAL>
+			</MvIF>
+			<MvASSIGN NAME = "new_usrname" VALUE = "{usrname}"></MvASSIGN>
+		</MvIF>
+
+		<MvASSIGN NAME = "xxx" VALUE = "{fdelete(passwdfile)}"></MvASSIGN>
+		<MvEXPORT FILE = "&[passwdfile];" FIELDS = "new_usrname,new_passwd" DELIMITER = ":"></MvEXPORT>
+	</MvIF>
+	</MvIF>
+
+	<MvCOMMENT> If changed or not, new_usrname has curr val </MvCOMMENT>
+	<MvASSIGN NAME = "parm_user" VALUE = "{new_usrname}"></MvASSIGN>
+
+	<MvIF EXPR = "{passwd_1 NE ''}">
+		<MvASSIGN NAME = "parm_pass" VALUE = "{passwd_1}"></MvASSIGN>
+	</MvIF>
+
+	<MvEVAL EXPR = ReturnHtml2()></MvEVAL>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "Error2" PARAMETERS = "error,originator">
+
+	<MvIF EXPR = "{l.error EQ 'bad_passwd2'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You entered an invalid password.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'bad_usrname2'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You entered an invalid user name.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'blank_in_username'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">Blanks are not permitted in the user name.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p></p>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'blank_in_new_password'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">Blanks are not permitted in the password.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p></p>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'empty_password'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You did not enter a new user name or password.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'empty_password2'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You did not enter a password.  Please try again.&[crlf];&[OFF];
+		&[ON];</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'passwd_file'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">Could not open the password file for reading!&[crlf];&[OFF];
+		&[ON];Check permissions and try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'not_same'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">The passwords that you typed in for your new password&[crlf];&[OFF];
+		&[ON];were not the same.  You may have mistyped, please try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'not_same2'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">The two passwords you typed were not the same.&[crlf];&[OFF];
+		&[ON];Please try again.</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'no_change'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">Could not open the password file for writing!&[crlf];&[OFF];
+		&[ON];Password not changed!</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'no_name'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You did not fill in your user name.&[crlf];&[OFF];
+		&[ON];</font></h3></center><p/>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'no_name2'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">You must fill in the user name that you want&[crlf];&[OFF];
+		&[ON];to use for administration.</font></h3></center><p>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'mailto'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">&[mailto_result];&[crlf];&[OFF];
+		&[ON];</font></h3></center><p>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	<MvELSE></MvELSE>
+	<MvIF EXPR = "{l.error EQ 'mailfrom'}">
+		<MvEVAL EXPR = &[originator];()></MvEVAL>
+		&[ON];<center><h3><font color="#ff0000">&[mailfrom_result];&[crlf];&[OFF];
+		&[ON];</font></h3></center><p>&[crlf];&[OFF];
+		<MvEVAL EXPR = Footer()></MvEVAL>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+	</MvIF>
+
+	<MvEXIT></MvEXIT>
+
+</MvFUNCTION>
+
+
+<MvFUNCTION NAME = "Footer">
+
+	&[ON];<hr width=90%>&[banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>#########################################################################
+# First time in, show welcome and continue button.                                 #
+#########################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ShowWelcome">
+
+	&[ON];<html><head>&[header];<title>Welcome to Guestbook Administration!</title></head>&[crlf];&[OFF];
+	&[ON];<body bgcolor="#ffffff"><center><h1>Welcome to Guestbook Administration!</h1></center>&[crlf];&[OFF];
+	&[ON];<form method=POST action="&[documenturl];parm_func=admin">&[crlf];&[OFF];
+	&[ON];<br><br><br><br>&[crlf];&[OFF];
+	&[ON];<center><input type=submit value="Continue"></INPUT>&[crlf];&[OFF];
+	&[ON];</form><hr width=90%>&[admin_banner_ad];&[footer];&[crlf];&[OFF];
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>######################################################################
+# Convert tags to long form.  E.g. <xxx> becomes &lt;xxx&gt;                    # 
+#                                                                               #
+# This is necessary because Internet Explorer won't display textareas with      #
+# their HTML intact, but rather "executes" it as HTML.  So we have to convert   #
+# HTML to harmless display form for display, and then back to active form       #
+# when receiving the textarea as submitted in a form for storage and actual use.#
+#                                                                               #
+#####################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ConvertTags" PARAMETERS = "infield">
+
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,less,longless)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,greater,longgreater)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,dquote,longdquote)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,quote,longquote)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,nbsp,longnbsp)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'[','&#091;')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,']','&#093;')}"></MvASSIGN>
+
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'(','&#040;')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,')','&#041;')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'!','&#033;')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'?','&#063;')}"></MvASSIGN>
+	<MvCOMMENT>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,';','&#059;')}"></MvASSIGN>
+	</MvCOMMENT>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'=','&#061;')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,asciichar(255),'')}"></MvASSIGN>
+	<MvFUNCRETURN VALUE = "{infield}"></MvFUNCRETURN>
+
+</MvFUNCTION>
+
+
+<MvCOMMENT>######################################################################
+# Convert tags to short form.  E.g. &lt;xxx&gt; becomes <xxx>                   # 
+#                                                                               #
+# This is necessary because Internet Explorer won't display textareas with      #
+# their HTML intact, but rather "executes" it as HTML.  So we have to convert   #
+# HTML to harmless display form for display, and then back to active form       #
+# when receiving the textarea as submitted in a form for storage and actual use.#
+#                                                                               #
+#####################################################################</MvCOMMENT>
+
+<MvFUNCTION NAME = "ReconvertTags" PARAMETERS = "infield">
+
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longdquote,dquote)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longnbsp,nbsp)}"></MvASSIGN>
+
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longless,less)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longgreater,greater)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longquote,quote)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,longnbsp,nbsp)}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#091;','[')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#093;',']')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#040;','(')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#041;',')')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#033;','!')}"></MvASSIGN>
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#063;','?')}"></MvASSIGN>
+	<MvCOMMENT>                                                     
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#059;',';')}"></MvASSIGN>
+	</MvCOMMENT>                                                    
+	<MvASSIGN NAME = "infield" VALUE = "{glosub(infield,'&#061;','=')}"></MvASSIGN>
+
+	<MvFUNCRETURN VALUE = "{infield}"></MvFUNCRETURN>
+
+</MvFUNCTION>
